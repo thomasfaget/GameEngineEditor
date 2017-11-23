@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,16 +46,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Components\BoxCollisionComponent.cs" />
+    <Compile Include="DataManager.cs" />
+    <Compile Include="Entity.cs" />
+    <Compile Include="GameEngineEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="GameEngineEditor.Designer.cs">
+      <DependentUpon>GameEngineEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="IComponent.cs" />
+    <Compile Include="Components\InputComponent.cs" />
+    <Compile Include="Components\PhysicsComponent.cs" />
+    <Compile Include="Components\PositionComponent.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Components\RenderComponent.cs" />
+    <Compile Include="Scene.cs" />
+    <Compile Include="Components\VelocityComponent.cs" />
+    <EmbeddedResource Include="GameEngineEditor.resx">
+      <DependentUpon>GameEngineEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

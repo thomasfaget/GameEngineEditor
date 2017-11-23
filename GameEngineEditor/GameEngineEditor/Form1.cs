@@ -41,5 +41,19 @@ namespace GameEngineEditor
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void scenePanelTitle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+                    }
     }
 }

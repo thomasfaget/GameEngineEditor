@@ -30,6 +30,11 @@ namespace GameEngineEditor
             _entities.Remove(entity);
         }
 
+        public void RemoveEntity(int index)
+        {
+            _entities.RemoveAt(index);
+        }
+
         // Get & Set
         public void SetName(string sceneName){name = sceneName;}
         public string GetName(){return name;}

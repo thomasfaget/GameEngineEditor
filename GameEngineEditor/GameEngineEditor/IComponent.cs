@@ -8,6 +8,7 @@ namespace GameEngineEditor
 {
     interface IComponent
     {
-        
+        bool GetEnable();
+        void SetEnable(bool value);
     }
 }

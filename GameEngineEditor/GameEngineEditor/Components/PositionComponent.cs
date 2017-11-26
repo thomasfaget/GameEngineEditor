@@ -9,6 +9,10 @@ namespace GameEngineEditor
 {
     class PositionComponent : IComponent
     {
+        public bool componentEnable = false;
+        public bool GetEnable() { return componentEnable; }
+        public void SetEnable(bool value) { componentEnable = value; }
+
         // Data comming from XML
         public Vector2 position = new Vector2(600, 100);
         public float orientation = 0f;

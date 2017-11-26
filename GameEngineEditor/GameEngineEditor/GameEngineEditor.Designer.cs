@@ -56,6 +56,22 @@
             this.componentPanel = new System.Windows.Forms.Panel();
             this.componentPanelTitle = new System.Windows.Forms.Label();
             this.componentComboBox = new System.Windows.Forms.ComboBox();
+            this.positionCompPanel = new System.Windows.Forms.Panel();
+            this.positionAngularTextBox = new System.Windows.Forms.TextBox();
+            this.positionAngularLabel = new System.Windows.Forms.Label();
+            this.positionYTextBox = new System.Windows.Forms.TextBox();
+            this.positionYLabel = new System.Windows.Forms.Label();
+            this.positionXTextBox = new System.Windows.Forms.TextBox();
+            this.positionEnableCheckBox = new System.Windows.Forms.CheckBox();
+            this.positionXLabel = new System.Windows.Forms.Label();
+            this.physicsCompPanel = new System.Windows.Forms.Panel();
+            this.physicsAirTweakerTextBox = new System.Windows.Forms.TextBox();
+            this.physicsAirTweakerLabel = new System.Windows.Forms.Label();
+            this.physicsAirFrictionCheckBox = new System.Windows.Forms.CheckBox();
+            this.physicsGravityCheckBox = new System.Windows.Forms.CheckBox();
+            this.physicsMasseTextBox = new System.Windows.Forms.TextBox();
+            this.physicsMasseLabel = new System.Windows.Forms.Label();
+            this.physicsEnableCheckBox = new System.Windows.Forms.CheckBox();
             this.renderCompPanel = new System.Windows.Forms.Panel();
             this.renderSizeYTextBox = new System.Windows.Forms.TextBox();
             this.renderSizeYLabel = new System.Windows.Forms.Label();
@@ -78,22 +94,6 @@
             this.velocityMaxTextBox = new System.Windows.Forms.TextBox();
             this.velocityEnableCheckBox = new System.Windows.Forms.CheckBox();
             this.velocityMaxLabel = new System.Windows.Forms.Label();
-            this.positionCompPanel = new System.Windows.Forms.Panel();
-            this.positionAngularTextBox = new System.Windows.Forms.TextBox();
-            this.positionAngularLabel = new System.Windows.Forms.Label();
-            this.positionYTextBox = new System.Windows.Forms.TextBox();
-            this.positionYLabel = new System.Windows.Forms.Label();
-            this.positionXTextBox = new System.Windows.Forms.TextBox();
-            this.positionEnableCheckBox = new System.Windows.Forms.CheckBox();
-            this.positionXLabel = new System.Windows.Forms.Label();
-            this.physicsCompPanel = new System.Windows.Forms.Panel();
-            this.physicsAirTweakerTextBox = new System.Windows.Forms.TextBox();
-            this.physicsAirTweakerLabel = new System.Windows.Forms.Label();
-            this.physicsAirFrictionCheckBox = new System.Windows.Forms.CheckBox();
-            this.physicsGravityCheckBox = new System.Windows.Forms.CheckBox();
-            this.physicsMasseTextBox = new System.Windows.Forms.TextBox();
-            this.physicsMasseLabel = new System.Windows.Forms.Label();
-            this.physicsEnableCheckBox = new System.Windows.Forms.CheckBox();
             this.gamePanel = new System.Windows.Forms.Panel();
             this.filePanel = new System.Windows.Forms.Panel();
             this.exportBtn = new System.Windows.Forms.Button();
@@ -105,12 +105,12 @@
             this.scenePanel.SuspendLayout();
             this.entityPanel.SuspendLayout();
             this.componentPanel.SuspendLayout();
+            this.positionCompPanel.SuspendLayout();
+            this.physicsCompPanel.SuspendLayout();
             this.renderCompPanel.SuspendLayout();
             this.boxColliderCompPanel.SuspendLayout();
             this.inputCompPanel.SuspendLayout();
             this.velocityCompPanel.SuspendLayout();
-            this.positionCompPanel.SuspendLayout();
-            this.physicsCompPanel.SuspendLayout();
             this.filePanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -151,6 +151,7 @@
             this.heightTextBox.Name = "heightTextBox";
             this.heightTextBox.Size = new System.Drawing.Size(46, 22);
             this.heightTextBox.TabIndex = 6;
+            this.heightTextBox.TextChanged += new System.EventHandler(this.heightTextBox_TextChanged);
             // 
             // heightLabel
             // 
@@ -169,6 +170,7 @@
             this.widthTextBox.Name = "widthTextBox";
             this.widthTextBox.Size = new System.Drawing.Size(46, 22);
             this.widthTextBox.TabIndex = 4;
+            this.widthTextBox.TextChanged += new System.EventHandler(this.widthTextBox_TextChanged);
             // 
             // widthLabel
             // 
@@ -280,7 +282,6 @@
             this.scenePanelTitle.TabIndex = 0;
             this.scenePanelTitle.Text = "SCENE";
             this.scenePanelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.scenePanelTitle.Click += new System.EventHandler(this.scenePanelTitle_Click);
             // 
             // sceneComboBox
             // 
@@ -289,7 +290,7 @@
             this.sceneComboBox.Name = "sceneComboBox";
             this.sceneComboBox.Size = new System.Drawing.Size(201, 24);
             this.sceneComboBox.TabIndex = 0;
-            this.sceneComboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            this.sceneComboBox.SelectedIndexChanged += new System.EventHandler(this.sceneComboBox_SelectedIndexChanged);
             // 
             // sceneRemoveBtn
             // 
@@ -300,6 +301,7 @@
             this.sceneRemoveBtn.TabIndex = 4;
             this.sceneRemoveBtn.Text = "-";
             this.sceneRemoveBtn.UseVisualStyleBackColor = true;
+            this.sceneRemoveBtn.Click += new System.EventHandler(this.sceneRemoveBtn_Click);
             // 
             // sceneAddBtn
             // 
@@ -310,7 +312,7 @@
             this.sceneAddBtn.TabIndex = 3;
             this.sceneAddBtn.Text = "+";
             this.sceneAddBtn.UseVisualStyleBackColor = true;
-            this.sceneAddBtn.Click += new System.EventHandler(this.button2_Click);
+            this.sceneAddBtn.Click += new System.EventHandler(this.sceneAddBtn_Click);
             // 
             // entityPanel
             // 
@@ -377,6 +379,7 @@
             this.entityRemoveBtn.TabIndex = 4;
             this.entityRemoveBtn.Text = "-";
             this.entityRemoveBtn.UseVisualStyleBackColor = true;
+            this.entityRemoveBtn.Click += new System.EventHandler(this.entityRemoveBtn_Click);
             // 
             // entityAddBtn
             // 
@@ -387,18 +390,19 @@
             this.entityAddBtn.TabIndex = 3;
             this.entityAddBtn.Text = "+";
             this.entityAddBtn.UseVisualStyleBackColor = true;
+            this.entityAddBtn.Click += new System.EventHandler(this.entityAddBtn_Click);
             // 
             // componentPanel
             // 
             this.componentPanel.BackColor = System.Drawing.Color.Transparent;
             this.componentPanel.Controls.Add(this.componentPanelTitle);
             this.componentPanel.Controls.Add(this.componentComboBox);
+            this.componentPanel.Controls.Add(this.positionCompPanel);
             this.componentPanel.Controls.Add(this.physicsCompPanel);
             this.componentPanel.Controls.Add(this.renderCompPanel);
             this.componentPanel.Controls.Add(this.boxColliderCompPanel);
             this.componentPanel.Controls.Add(this.inputCompPanel);
             this.componentPanel.Controls.Add(this.velocityCompPanel);
-            this.componentPanel.Controls.Add(this.positionCompPanel);
             this.componentPanel.ForeColor = System.Drawing.Color.White;
             this.componentPanel.Location = new System.Drawing.Point(0, 410);
             this.componentPanel.Name = "componentPanel";
@@ -434,231 +438,6 @@
             this.componentComboBox.TabIndex = 0;
             this.componentComboBox.SelectedIndexChanged += new System.EventHandler(this.componentComboBox_SelectedIndexChanged);
             // 
-            // renderCompPanel
-            // 
-            this.renderCompPanel.Controls.Add(this.renderSizeYTextBox);
-            this.renderCompPanel.Controls.Add(this.renderSizeYLabel);
-            this.renderCompPanel.Controls.Add(this.renderSizeXTextBox);
-            this.renderCompPanel.Controls.Add(this.renderSizeXLabel);
-            this.renderCompPanel.Controls.Add(this.renderImageTextBox);
-            this.renderCompPanel.Controls.Add(this.renderEnableCheckBox);
-            this.renderCompPanel.Controls.Add(this.renderImageLabel);
-            this.renderCompPanel.Location = new System.Drawing.Point(0, 80);
-            this.renderCompPanel.Name = "renderCompPanel";
-            this.renderCompPanel.Size = new System.Drawing.Size(285, 352);
-            this.renderCompPanel.TabIndex = 15;
-            // 
-            // renderSizeYTextBox
-            // 
-            this.renderSizeYTextBox.Location = new System.Drawing.Point(154, 107);
-            this.renderSizeYTextBox.Name = "renderSizeYTextBox";
-            this.renderSizeYTextBox.Size = new System.Drawing.Size(100, 22);
-            this.renderSizeYTextBox.TabIndex = 18;
-            // 
-            // renderSizeYLabel
-            // 
-            this.renderSizeYLabel.AutoSize = true;
-            this.renderSizeYLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.renderSizeYLabel.ForeColor = System.Drawing.Color.Black;
-            this.renderSizeYLabel.Location = new System.Drawing.Point(13, 109);
-            this.renderSizeYLabel.Name = "renderSizeYLabel";
-            this.renderSizeYLabel.Size = new System.Drawing.Size(43, 18);
-            this.renderSizeYLabel.TabIndex = 17;
-            this.renderSizeYLabel.Text = "Size Y";
-            // 
-            // renderSizeXTextBox
-            // 
-            this.renderSizeXTextBox.Location = new System.Drawing.Point(154, 77);
-            this.renderSizeXTextBox.Name = "renderSizeXTextBox";
-            this.renderSizeXTextBox.Size = new System.Drawing.Size(100, 22);
-            this.renderSizeXTextBox.TabIndex = 16;
-            // 
-            // renderSizeXLabel
-            // 
-            this.renderSizeXLabel.AutoSize = true;
-            this.renderSizeXLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.renderSizeXLabel.ForeColor = System.Drawing.Color.Black;
-            this.renderSizeXLabel.Location = new System.Drawing.Point(13, 79);
-            this.renderSizeXLabel.Name = "renderSizeXLabel";
-            this.renderSizeXLabel.Size = new System.Drawing.Size(44, 18);
-            this.renderSizeXLabel.TabIndex = 15;
-            this.renderSizeXLabel.Text = "Size X";
-            // 
-            // renderImageTextBox
-            // 
-            this.renderImageTextBox.Location = new System.Drawing.Point(154, 47);
-            this.renderImageTextBox.Name = "renderImageTextBox";
-            this.renderImageTextBox.Size = new System.Drawing.Size(100, 22);
-            this.renderImageTextBox.TabIndex = 14;
-            // 
-            // renderEnableCheckBox
-            // 
-            this.renderEnableCheckBox.AutoSize = true;
-            this.renderEnableCheckBox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.renderEnableCheckBox.ForeColor = System.Drawing.Color.Black;
-            this.renderEnableCheckBox.Location = new System.Drawing.Point(16, 12);
-            this.renderEnableCheckBox.Name = "renderEnableCheckBox";
-            this.renderEnableCheckBox.Size = new System.Drawing.Size(172, 22);
-            this.renderEnableCheckBox.TabIndex = 14;
-            this.renderEnableCheckBox.Text = "Enable this component";
-            this.renderEnableCheckBox.UseVisualStyleBackColor = true;
-            this.renderEnableCheckBox.CheckedChanged += new System.EventHandler(this.renderEnableCheckBox_CheckedChanged);
-            // 
-            // renderImageLabel
-            // 
-            this.renderImageLabel.AutoSize = true;
-            this.renderImageLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.renderImageLabel.ForeColor = System.Drawing.Color.Black;
-            this.renderImageLabel.Location = new System.Drawing.Point(13, 49);
-            this.renderImageLabel.Name = "renderImageLabel";
-            this.renderImageLabel.Size = new System.Drawing.Size(46, 18);
-            this.renderImageLabel.TabIndex = 13;
-            this.renderImageLabel.Text = "Image";
-            // 
-            // boxColliderCompPanel
-            // 
-            this.boxColliderCompPanel.Controls.Add(this.boxColliderSizeYTextBox);
-            this.boxColliderCompPanel.Controls.Add(this.boxColliderSizeYLabel);
-            this.boxColliderCompPanel.Controls.Add(this.boxColliderSizeXTextBox);
-            this.boxColliderCompPanel.Controls.Add(this.boxColliderEnableCheckBox);
-            this.boxColliderCompPanel.Controls.Add(this.boxColliderSizeXLabel);
-            this.boxColliderCompPanel.Location = new System.Drawing.Point(0, 80);
-            this.boxColliderCompPanel.Name = "boxColliderCompPanel";
-            this.boxColliderCompPanel.Size = new System.Drawing.Size(285, 352);
-            this.boxColliderCompPanel.TabIndex = 19;
-            // 
-            // boxColliderSizeYTextBox
-            // 
-            this.boxColliderSizeYTextBox.Location = new System.Drawing.Point(155, 75);
-            this.boxColliderSizeYTextBox.Name = "boxColliderSizeYTextBox";
-            this.boxColliderSizeYTextBox.Size = new System.Drawing.Size(100, 22);
-            this.boxColliderSizeYTextBox.TabIndex = 16;
-            // 
-            // boxColliderSizeYLabel
-            // 
-            this.boxColliderSizeYLabel.AutoSize = true;
-            this.boxColliderSizeYLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.boxColliderSizeYLabel.ForeColor = System.Drawing.Color.Black;
-            this.boxColliderSizeYLabel.Location = new System.Drawing.Point(14, 77);
-            this.boxColliderSizeYLabel.Name = "boxColliderSizeYLabel";
-            this.boxColliderSizeYLabel.Size = new System.Drawing.Size(43, 18);
-            this.boxColliderSizeYLabel.TabIndex = 15;
-            this.boxColliderSizeYLabel.Text = "Size Y";
-            // 
-            // boxColliderSizeXTextBox
-            // 
-            this.boxColliderSizeXTextBox.Location = new System.Drawing.Point(154, 47);
-            this.boxColliderSizeXTextBox.Name = "boxColliderSizeXTextBox";
-            this.boxColliderSizeXTextBox.Size = new System.Drawing.Size(100, 22);
-            this.boxColliderSizeXTextBox.TabIndex = 14;
-            // 
-            // boxColliderEnableCheckBox
-            // 
-            this.boxColliderEnableCheckBox.AutoSize = true;
-            this.boxColliderEnableCheckBox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.boxColliderEnableCheckBox.ForeColor = System.Drawing.Color.Black;
-            this.boxColliderEnableCheckBox.Location = new System.Drawing.Point(16, 12);
-            this.boxColliderEnableCheckBox.Name = "boxColliderEnableCheckBox";
-            this.boxColliderEnableCheckBox.Size = new System.Drawing.Size(172, 22);
-            this.boxColliderEnableCheckBox.TabIndex = 14;
-            this.boxColliderEnableCheckBox.Text = "Enable this component";
-            this.boxColliderEnableCheckBox.UseVisualStyleBackColor = true;
-            this.boxColliderEnableCheckBox.CheckedChanged += new System.EventHandler(this.boxColliderEnableCheckBox_CheckedChanged);
-            // 
-            // boxColliderSizeXLabel
-            // 
-            this.boxColliderSizeXLabel.AutoSize = true;
-            this.boxColliderSizeXLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.boxColliderSizeXLabel.ForeColor = System.Drawing.Color.Black;
-            this.boxColliderSizeXLabel.Location = new System.Drawing.Point(13, 49);
-            this.boxColliderSizeXLabel.Name = "boxColliderSizeXLabel";
-            this.boxColliderSizeXLabel.Size = new System.Drawing.Size(44, 18);
-            this.boxColliderSizeXLabel.TabIndex = 13;
-            this.boxColliderSizeXLabel.Text = "Size X";
-            // 
-            // inputCompPanel
-            // 
-            this.inputCompPanel.Controls.Add(this.inputTweakerTextBox);
-            this.inputCompPanel.Controls.Add(this.inputEnableCheckBox);
-            this.inputCompPanel.Controls.Add(this.inputTweakerLabel);
-            this.inputCompPanel.Location = new System.Drawing.Point(0, 80);
-            this.inputCompPanel.Name = "inputCompPanel";
-            this.inputCompPanel.Size = new System.Drawing.Size(285, 352);
-            this.inputCompPanel.TabIndex = 18;
-            this.inputCompPanel.Visible = false;
-            // 
-            // inputTweakerTextBox
-            // 
-            this.inputTweakerTextBox.Location = new System.Drawing.Point(154, 47);
-            this.inputTweakerTextBox.Name = "inputTweakerTextBox";
-            this.inputTweakerTextBox.Size = new System.Drawing.Size(100, 22);
-            this.inputTweakerTextBox.TabIndex = 14;
-            // 
-            // inputEnableCheckBox
-            // 
-            this.inputEnableCheckBox.AutoSize = true;
-            this.inputEnableCheckBox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.inputEnableCheckBox.ForeColor = System.Drawing.Color.Black;
-            this.inputEnableCheckBox.Location = new System.Drawing.Point(16, 12);
-            this.inputEnableCheckBox.Name = "inputEnableCheckBox";
-            this.inputEnableCheckBox.Size = new System.Drawing.Size(172, 22);
-            this.inputEnableCheckBox.TabIndex = 14;
-            this.inputEnableCheckBox.Text = "Enable this component";
-            this.inputEnableCheckBox.UseVisualStyleBackColor = true;
-            this.inputEnableCheckBox.CheckedChanged += new System.EventHandler(this.inputEnableCheckBock_CheckedChanged);
-            // 
-            // inputTweakerLabel
-            // 
-            this.inputTweakerLabel.AutoSize = true;
-            this.inputTweakerLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.inputTweakerLabel.ForeColor = System.Drawing.Color.Black;
-            this.inputTweakerLabel.Location = new System.Drawing.Point(13, 49);
-            this.inputTweakerLabel.Name = "inputTweakerLabel";
-            this.inputTweakerLabel.Size = new System.Drawing.Size(96, 18);
-            this.inputTweakerLabel.TabIndex = 13;
-            this.inputTweakerLabel.Text = "Input Tweaker";
-            // 
-            // velocityCompPanel
-            // 
-            this.velocityCompPanel.Controls.Add(this.velocityMaxTextBox);
-            this.velocityCompPanel.Controls.Add(this.velocityEnableCheckBox);
-            this.velocityCompPanel.Controls.Add(this.velocityMaxLabel);
-            this.velocityCompPanel.Location = new System.Drawing.Point(0, 80);
-            this.velocityCompPanel.Name = "velocityCompPanel";
-            this.velocityCompPanel.Size = new System.Drawing.Size(285, 352);
-            this.velocityCompPanel.TabIndex = 17;
-            // 
-            // velocityMaxTextBox
-            // 
-            this.velocityMaxTextBox.Location = new System.Drawing.Point(158, 49);
-            this.velocityMaxTextBox.Name = "velocityMaxTextBox";
-            this.velocityMaxTextBox.Size = new System.Drawing.Size(100, 22);
-            this.velocityMaxTextBox.TabIndex = 14;
-            // 
-            // velocityEnableCheckBox
-            // 
-            this.velocityEnableCheckBox.AutoSize = true;
-            this.velocityEnableCheckBox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.velocityEnableCheckBox.ForeColor = System.Drawing.Color.Black;
-            this.velocityEnableCheckBox.Location = new System.Drawing.Point(16, 12);
-            this.velocityEnableCheckBox.Name = "velocityEnableCheckBox";
-            this.velocityEnableCheckBox.Size = new System.Drawing.Size(172, 22);
-            this.velocityEnableCheckBox.TabIndex = 14;
-            this.velocityEnableCheckBox.Text = "Enable this component";
-            this.velocityEnableCheckBox.UseVisualStyleBackColor = true;
-            this.velocityEnableCheckBox.CheckedChanged += new System.EventHandler(this.velocityEnableCheckBox_CheckedChanged);
-            // 
-            // velocityMaxLabel
-            // 
-            this.velocityMaxLabel.AutoSize = true;
-            this.velocityMaxLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.velocityMaxLabel.ForeColor = System.Drawing.Color.Black;
-            this.velocityMaxLabel.Location = new System.Drawing.Point(17, 51);
-            this.velocityMaxLabel.Name = "velocityMaxLabel";
-            this.velocityMaxLabel.Size = new System.Drawing.Size(86, 18);
-            this.velocityMaxLabel.TabIndex = 13;
-            this.velocityMaxLabel.Text = "Max velocity";
-            // 
             // positionCompPanel
             // 
             this.positionCompPanel.Controls.Add(this.positionAngularTextBox);
@@ -679,6 +458,7 @@
             this.positionAngularTextBox.Name = "positionAngularTextBox";
             this.positionAngularTextBox.Size = new System.Drawing.Size(100, 22);
             this.positionAngularTextBox.TabIndex = 18;
+            this.positionAngularTextBox.TextChanged += new System.EventHandler(this.positionAngularTextBox_TextChanged);
             // 
             // positionAngularLabel
             // 
@@ -697,6 +477,7 @@
             this.positionYTextBox.Name = "positionYTextBox";
             this.positionYTextBox.Size = new System.Drawing.Size(100, 22);
             this.positionYTextBox.TabIndex = 16;
+            this.positionYTextBox.TextChanged += new System.EventHandler(this.positionYTextBox_TextChanged);
             // 
             // positionYLabel
             // 
@@ -715,6 +496,7 @@
             this.positionXTextBox.Name = "positionXTextBox";
             this.positionXTextBox.Size = new System.Drawing.Size(100, 22);
             this.positionXTextBox.TabIndex = 14;
+            this.positionXTextBox.TextChanged += new System.EventHandler(this.positionXTextBox_TextChanged);
             // 
             // positionEnableCheckBox
             // 
@@ -760,6 +542,7 @@
             this.physicsAirTweakerTextBox.Name = "physicsAirTweakerTextBox";
             this.physicsAirTweakerTextBox.Size = new System.Drawing.Size(100, 22);
             this.physicsAirTweakerTextBox.TabIndex = 22;
+            this.physicsAirTweakerTextBox.TextChanged += new System.EventHandler(this.physicsAirTweakerTextBox_TextChanged);
             // 
             // physicsAirTweakerLabel
             // 
@@ -783,6 +566,7 @@
             this.physicsAirFrictionCheckBox.TabIndex = 20;
             this.physicsAirFrictionCheckBox.Text = "Use air friction";
             this.physicsAirFrictionCheckBox.UseVisualStyleBackColor = true;
+            this.physicsAirFrictionCheckBox.CheckedChanged += new System.EventHandler(this.physicsAirFrictionCheckBox_CheckedChanged);
             // 
             // physicsGravityCheckBox
             // 
@@ -795,6 +579,7 @@
             this.physicsGravityCheckBox.TabIndex = 19;
             this.physicsGravityCheckBox.Text = "Use gravity";
             this.physicsGravityCheckBox.UseVisualStyleBackColor = true;
+            this.physicsGravityCheckBox.CheckedChanged += new System.EventHandler(this.physicsGravityCheckBox_CheckedChanged);
             // 
             // physicsMasseTextBox
             // 
@@ -828,6 +613,238 @@
             this.physicsEnableCheckBox.UseVisualStyleBackColor = true;
             this.physicsEnableCheckBox.CheckedChanged += new System.EventHandler(this.physicsEnableCheckBox_CheckedChanged);
             // 
+            // renderCompPanel
+            // 
+            this.renderCompPanel.Controls.Add(this.renderSizeYTextBox);
+            this.renderCompPanel.Controls.Add(this.renderSizeYLabel);
+            this.renderCompPanel.Controls.Add(this.renderSizeXTextBox);
+            this.renderCompPanel.Controls.Add(this.renderSizeXLabel);
+            this.renderCompPanel.Controls.Add(this.renderImageTextBox);
+            this.renderCompPanel.Controls.Add(this.renderEnableCheckBox);
+            this.renderCompPanel.Controls.Add(this.renderImageLabel);
+            this.renderCompPanel.Location = new System.Drawing.Point(0, 80);
+            this.renderCompPanel.Name = "renderCompPanel";
+            this.renderCompPanel.Size = new System.Drawing.Size(285, 352);
+            this.renderCompPanel.TabIndex = 15;
+            // 
+            // renderSizeYTextBox
+            // 
+            this.renderSizeYTextBox.Location = new System.Drawing.Point(154, 107);
+            this.renderSizeYTextBox.Name = "renderSizeYTextBox";
+            this.renderSizeYTextBox.Size = new System.Drawing.Size(100, 22);
+            this.renderSizeYTextBox.TabIndex = 18;
+            this.renderSizeYTextBox.TextChanged += new System.EventHandler(this.renderSizeYTextBox_TextChanged);
+            // 
+            // renderSizeYLabel
+            // 
+            this.renderSizeYLabel.AutoSize = true;
+            this.renderSizeYLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.renderSizeYLabel.ForeColor = System.Drawing.Color.Black;
+            this.renderSizeYLabel.Location = new System.Drawing.Point(13, 109);
+            this.renderSizeYLabel.Name = "renderSizeYLabel";
+            this.renderSizeYLabel.Size = new System.Drawing.Size(43, 18);
+            this.renderSizeYLabel.TabIndex = 17;
+            this.renderSizeYLabel.Text = "Size Y";
+            // 
+            // renderSizeXTextBox
+            // 
+            this.renderSizeXTextBox.Location = new System.Drawing.Point(154, 77);
+            this.renderSizeXTextBox.Name = "renderSizeXTextBox";
+            this.renderSizeXTextBox.Size = new System.Drawing.Size(100, 22);
+            this.renderSizeXTextBox.TabIndex = 16;
+            this.renderSizeXTextBox.TextChanged += new System.EventHandler(this.renderSizeXTextBox_TextChanged);
+            // 
+            // renderSizeXLabel
+            // 
+            this.renderSizeXLabel.AutoSize = true;
+            this.renderSizeXLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.renderSizeXLabel.ForeColor = System.Drawing.Color.Black;
+            this.renderSizeXLabel.Location = new System.Drawing.Point(13, 79);
+            this.renderSizeXLabel.Name = "renderSizeXLabel";
+            this.renderSizeXLabel.Size = new System.Drawing.Size(44, 18);
+            this.renderSizeXLabel.TabIndex = 15;
+            this.renderSizeXLabel.Text = "Size X";
+            // 
+            // renderImageTextBox
+            // 
+            this.renderImageTextBox.Location = new System.Drawing.Point(154, 47);
+            this.renderImageTextBox.Name = "renderImageTextBox";
+            this.renderImageTextBox.Size = new System.Drawing.Size(100, 22);
+            this.renderImageTextBox.TabIndex = 14;
+            this.renderImageTextBox.TextChanged += new System.EventHandler(this.renderImageTextBox_TextChanged);
+            // 
+            // renderEnableCheckBox
+            // 
+            this.renderEnableCheckBox.AutoSize = true;
+            this.renderEnableCheckBox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.renderEnableCheckBox.ForeColor = System.Drawing.Color.Black;
+            this.renderEnableCheckBox.Location = new System.Drawing.Point(16, 12);
+            this.renderEnableCheckBox.Name = "renderEnableCheckBox";
+            this.renderEnableCheckBox.Size = new System.Drawing.Size(172, 22);
+            this.renderEnableCheckBox.TabIndex = 14;
+            this.renderEnableCheckBox.Text = "Enable this component";
+            this.renderEnableCheckBox.UseVisualStyleBackColor = true;
+            this.renderEnableCheckBox.CheckedChanged += new System.EventHandler(this.renderEnableCheckBox_CheckedChanged);
+            // 
+            // renderImageLabel
+            // 
+            this.renderImageLabel.AutoSize = true;
+            this.renderImageLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.renderImageLabel.ForeColor = System.Drawing.Color.Black;
+            this.renderImageLabel.Location = new System.Drawing.Point(13, 49);
+            this.renderImageLabel.Name = "renderImageLabel";
+            this.renderImageLabel.Size = new System.Drawing.Size(46, 18);
+            this.renderImageLabel.TabIndex = 13;
+            this.renderImageLabel.Text = "Image";
+            // 
+            // boxColliderCompPanel
+            // 
+            this.boxColliderCompPanel.Controls.Add(this.boxColliderSizeYTextBox);
+            this.boxColliderCompPanel.Controls.Add(this.boxColliderSizeYLabel);
+            this.boxColliderCompPanel.Controls.Add(this.boxColliderSizeXTextBox);
+            this.boxColliderCompPanel.Controls.Add(this.boxColliderEnableCheckBox);
+            this.boxColliderCompPanel.Controls.Add(this.boxColliderSizeXLabel);
+            this.boxColliderCompPanel.Location = new System.Drawing.Point(0, 80);
+            this.boxColliderCompPanel.Name = "boxColliderCompPanel";
+            this.boxColliderCompPanel.Size = new System.Drawing.Size(285, 352);
+            this.boxColliderCompPanel.TabIndex = 19;
+            // 
+            // boxColliderSizeYTextBox
+            // 
+            this.boxColliderSizeYTextBox.Location = new System.Drawing.Point(155, 75);
+            this.boxColliderSizeYTextBox.Name = "boxColliderSizeYTextBox";
+            this.boxColliderSizeYTextBox.Size = new System.Drawing.Size(100, 22);
+            this.boxColliderSizeYTextBox.TabIndex = 16;
+            this.boxColliderSizeYTextBox.TextChanged += new System.EventHandler(this.boxColliderSizeYTextBox_TextChanged);
+            // 
+            // boxColliderSizeYLabel
+            // 
+            this.boxColliderSizeYLabel.AutoSize = true;
+            this.boxColliderSizeYLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.boxColliderSizeYLabel.ForeColor = System.Drawing.Color.Black;
+            this.boxColliderSizeYLabel.Location = new System.Drawing.Point(14, 77);
+            this.boxColliderSizeYLabel.Name = "boxColliderSizeYLabel";
+            this.boxColliderSizeYLabel.Size = new System.Drawing.Size(43, 18);
+            this.boxColliderSizeYLabel.TabIndex = 15;
+            this.boxColliderSizeYLabel.Text = "Size Y";
+            // 
+            // boxColliderSizeXTextBox
+            // 
+            this.boxColliderSizeXTextBox.Location = new System.Drawing.Point(154, 47);
+            this.boxColliderSizeXTextBox.Name = "boxColliderSizeXTextBox";
+            this.boxColliderSizeXTextBox.Size = new System.Drawing.Size(100, 22);
+            this.boxColliderSizeXTextBox.TabIndex = 14;
+            this.boxColliderSizeXTextBox.TextChanged += new System.EventHandler(this.boxColliderSizeXTextBox_TextChanged);
+            // 
+            // boxColliderEnableCheckBox
+            // 
+            this.boxColliderEnableCheckBox.AutoSize = true;
+            this.boxColliderEnableCheckBox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.boxColliderEnableCheckBox.ForeColor = System.Drawing.Color.Black;
+            this.boxColliderEnableCheckBox.Location = new System.Drawing.Point(16, 12);
+            this.boxColliderEnableCheckBox.Name = "boxColliderEnableCheckBox";
+            this.boxColliderEnableCheckBox.Size = new System.Drawing.Size(172, 22);
+            this.boxColliderEnableCheckBox.TabIndex = 14;
+            this.boxColliderEnableCheckBox.Text = "Enable this component";
+            this.boxColliderEnableCheckBox.UseVisualStyleBackColor = true;
+            this.boxColliderEnableCheckBox.CheckedChanged += new System.EventHandler(this.boxColliderEnableCheckBox_CheckedChanged);
+            // 
+            // boxColliderSizeXLabel
+            // 
+            this.boxColliderSizeXLabel.AutoSize = true;
+            this.boxColliderSizeXLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.boxColliderSizeXLabel.ForeColor = System.Drawing.Color.Black;
+            this.boxColliderSizeXLabel.Location = new System.Drawing.Point(13, 49);
+            this.boxColliderSizeXLabel.Name = "boxColliderSizeXLabel";
+            this.boxColliderSizeXLabel.Size = new System.Drawing.Size(44, 18);
+            this.boxColliderSizeXLabel.TabIndex = 13;
+            this.boxColliderSizeXLabel.Text = "Size X";
+            // 
+            // inputCompPanel
+            // 
+            this.inputCompPanel.Controls.Add(this.inputTweakerTextBox);
+            this.inputCompPanel.Controls.Add(this.inputEnableCheckBox);
+            this.inputCompPanel.Controls.Add(this.inputTweakerLabel);
+            this.inputCompPanel.Location = new System.Drawing.Point(0, 80);
+            this.inputCompPanel.Name = "inputCompPanel";
+            this.inputCompPanel.Size = new System.Drawing.Size(285, 352);
+            this.inputCompPanel.TabIndex = 18;
+            this.inputCompPanel.Visible = false;
+            // 
+            // inputTweakerTextBox
+            // 
+            this.inputTweakerTextBox.Location = new System.Drawing.Point(154, 47);
+            this.inputTweakerTextBox.Name = "inputTweakerTextBox";
+            this.inputTweakerTextBox.Size = new System.Drawing.Size(100, 22);
+            this.inputTweakerTextBox.TabIndex = 14;
+            this.inputTweakerTextBox.TextChanged += new System.EventHandler(this.inputTweakerTextBox_TextChanged);
+            // 
+            // inputEnableCheckBox
+            // 
+            this.inputEnableCheckBox.AutoSize = true;
+            this.inputEnableCheckBox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inputEnableCheckBox.ForeColor = System.Drawing.Color.Black;
+            this.inputEnableCheckBox.Location = new System.Drawing.Point(16, 12);
+            this.inputEnableCheckBox.Name = "inputEnableCheckBox";
+            this.inputEnableCheckBox.Size = new System.Drawing.Size(172, 22);
+            this.inputEnableCheckBox.TabIndex = 14;
+            this.inputEnableCheckBox.Text = "Enable this component";
+            this.inputEnableCheckBox.UseVisualStyleBackColor = true;
+            this.inputEnableCheckBox.CheckedChanged += new System.EventHandler(this.inputEnableCheckBock_CheckedChanged);
+            // 
+            // inputTweakerLabel
+            // 
+            this.inputTweakerLabel.AutoSize = true;
+            this.inputTweakerLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inputTweakerLabel.ForeColor = System.Drawing.Color.Black;
+            this.inputTweakerLabel.Location = new System.Drawing.Point(13, 49);
+            this.inputTweakerLabel.Name = "inputTweakerLabel";
+            this.inputTweakerLabel.Size = new System.Drawing.Size(96, 18);
+            this.inputTweakerLabel.TabIndex = 13;
+            this.inputTweakerLabel.Text = "Input Tweaker";
+            // 
+            // velocityCompPanel
+            // 
+            this.velocityCompPanel.Controls.Add(this.velocityMaxTextBox);
+            this.velocityCompPanel.Controls.Add(this.velocityEnableCheckBox);
+            this.velocityCompPanel.Controls.Add(this.velocityMaxLabel);
+            this.velocityCompPanel.Location = new System.Drawing.Point(0, 80);
+            this.velocityCompPanel.Name = "velocityCompPanel";
+            this.velocityCompPanel.Size = new System.Drawing.Size(285, 352);
+            this.velocityCompPanel.TabIndex = 17;
+            // 
+            // velocityMaxTextBox
+            // 
+            this.velocityMaxTextBox.Location = new System.Drawing.Point(158, 49);
+            this.velocityMaxTextBox.Name = "velocityMaxTextBox";
+            this.velocityMaxTextBox.Size = new System.Drawing.Size(100, 22);
+            this.velocityMaxTextBox.TabIndex = 14;
+            this.velocityMaxTextBox.TextChanged += new System.EventHandler(this.velocityMaxTextBox_TextChanged);
+            // 
+            // velocityEnableCheckBox
+            // 
+            this.velocityEnableCheckBox.AutoSize = true;
+            this.velocityEnableCheckBox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.velocityEnableCheckBox.ForeColor = System.Drawing.Color.Black;
+            this.velocityEnableCheckBox.Location = new System.Drawing.Point(16, 12);
+            this.velocityEnableCheckBox.Name = "velocityEnableCheckBox";
+            this.velocityEnableCheckBox.Size = new System.Drawing.Size(172, 22);
+            this.velocityEnableCheckBox.TabIndex = 14;
+            this.velocityEnableCheckBox.Text = "Enable this component";
+            this.velocityEnableCheckBox.UseVisualStyleBackColor = true;
+            this.velocityEnableCheckBox.CheckedChanged += new System.EventHandler(this.velocityEnableCheckBox_CheckedChanged);
+            // 
+            // velocityMaxLabel
+            // 
+            this.velocityMaxLabel.AutoSize = true;
+            this.velocityMaxLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.velocityMaxLabel.ForeColor = System.Drawing.Color.Black;
+            this.velocityMaxLabel.Location = new System.Drawing.Point(17, 51);
+            this.velocityMaxLabel.Name = "velocityMaxLabel";
+            this.velocityMaxLabel.Size = new System.Drawing.Size(86, 18);
+            this.velocityMaxLabel.TabIndex = 13;
+            this.velocityMaxLabel.Text = "Max velocity";
+            // 
             // gamePanel
             // 
             this.gamePanel.BackColor = System.Drawing.SystemColors.HighlightText;
@@ -835,7 +852,6 @@
             this.gamePanel.Name = "gamePanel";
             this.gamePanel.Size = new System.Drawing.Size(1280, 720);
             this.gamePanel.TabIndex = 2;
-            this.gamePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // filePanel
             // 
@@ -869,14 +885,9 @@
             this.importBtn.UseVisualStyleBackColor = false;
             this.importBtn.Click += new System.EventHandler(this.importBtn_Click);
             // 
-            // ExportFileDialogBox
-            // 
-            this.ExportFileDialogBox.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
-            // 
             // ImportFileDialogBox
             // 
             this.ImportFileDialogBox.FileName = "openFileDialog1";
-            this.ImportFileDialogBox.FileOk += new System.ComponentModel.CancelEventHandler(this.ImportFileDialogBox_FileOk);
             // 
             // GameEngineEditor
             // 
@@ -897,6 +908,10 @@
             this.entityPanel.ResumeLayout(false);
             this.entityPanel.PerformLayout();
             this.componentPanel.ResumeLayout(false);
+            this.positionCompPanel.ResumeLayout(false);
+            this.positionCompPanel.PerformLayout();
+            this.physicsCompPanel.ResumeLayout(false);
+            this.physicsCompPanel.PerformLayout();
             this.renderCompPanel.ResumeLayout(false);
             this.renderCompPanel.PerformLayout();
             this.boxColliderCompPanel.ResumeLayout(false);
@@ -905,10 +920,6 @@
             this.inputCompPanel.PerformLayout();
             this.velocityCompPanel.ResumeLayout(false);
             this.velocityCompPanel.PerformLayout();
-            this.positionCompPanel.ResumeLayout(false);
-            this.positionCompPanel.PerformLayout();
-            this.physicsCompPanel.ResumeLayout(false);
-            this.physicsCompPanel.PerformLayout();
             this.filePanel.ResumeLayout(false);
             this.ResumeLayout(false);
 

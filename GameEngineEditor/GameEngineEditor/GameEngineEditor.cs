@@ -28,51 +28,7 @@ namespace GameEngineEditor
             InitializeComponent();           
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
-        {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DataManager.instance.UpdateSceneProperties();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void scenePanelTitle_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ImportFileDialogBox_FileOk(object sender, CancelEventArgs e)
-        {
-   
-        }
-
+        #region "Import/Export EventHandlers"
         private void importBtn_Click(object sender, EventArgs e)
         {
             Stream myStream = null;
@@ -120,190 +76,189 @@ namespace GameEngineEditor
                 }
             }
         }
+        #endregion
 
+        #region "Game properties EventHandlers"
         private void gameTitleTextBox_TextChanged(object sender, EventArgs e)
         {
-            DataManager.instance.gameProperties.gameName = gameTitleTextBox.Text;
+            DataManager.instance.GameTitleChanged();
         }
 
-        private void entityComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void widthTextBox_TextChanged(object sender, EventArgs e)
         {
-            DataManager.instance.UpdateEntityProperties();
+            DataManager.instance.GameWidthChanged();
         }
 
-        private void componentComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void heightTextBox_TextChanged(object sender, EventArgs e)
         {
-            DataManager.instance.ShowCorrectComponentPanel();
+            DataManager.instance.GameHeightChanged();
+        }
+        #endregion
+
+        #region "Scene EventHandlers"
+        private void sceneComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataManager.instance.SceneSelectedChanged();
         }
 
-        private void entityNameTextBox_TextChanged(object sender, EventArgs e)
+        private void sceneAddBtn_Click(object sender, EventArgs e)
         {
-            int indexScene = GameEngineEditor.instance.sceneComboBox.SelectedIndex;
-            int indexEntity = GameEngineEditor.instance.entityComboBox.SelectedIndex;
-            if (indexScene >= 0 && indexEntity >= 0)
-            {
-                DataManager.instance._scenes[indexScene].GetEntities()[indexEntity].SetName(entityNameTextBox.Text);
-            }
+            DataManager.instance.AddSceneClicked();
         }
 
-        private void backgroundImgTextBox_TextChanged(object sender, EventArgs e)
+        private void sceneRemoveBtn_Click(object sender, EventArgs e)
         {
-            int indexScene = GameEngineEditor.instance.sceneComboBox.SelectedIndex;
-            if (indexScene >= 0)
-            {
-                DataManager.instance._scenes[indexScene].SetBackgroundImage(backgroundImgTextBox.Text);
-            }
+            DataManager.instance.RemoveSceneClicked();
         }
 
         private void sceneNameTextBox_TextChanged(object sender, EventArgs e)
         {
-            int indexScene = GameEngineEditor.instance.sceneComboBox.SelectedIndex;
-            if (indexScene >= 0)
-            {
-                DataManager.instance._scenes[indexScene].SetName(sceneNameTextBox.Text);
-            }
+            DataManager.instance.SceneNameChanged();
         }
 
-        private void physicsEnableCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void backgroundImgTextBox_TextChanged(object sender, EventArgs e)
         {
-            int indexScene = GameEngineEditor.instance.sceneComboBox.SelectedIndex;
-            int indexEntity = GameEngineEditor.instance.entityComboBox.SelectedIndex;
-
-            if (indexScene >= 0 && indexEntity >= 0)
-            {
-                if (physicsEnableCheckBox.Checked == true)
-                {
-                    DataManager.instance._scenes[indexScene].GetEntities()[indexEntity].AddComponent(new PhysicsComponent());
-                }
-                else
-                {
-                    DataManager.instance._scenes[indexScene].GetEntities()[indexEntity].RemoveComponentOfType(typeof(PhysicsComponent));
-                }
-            }
-            else
-            {
-                DataManager.instance.ClearComponentPanel();
-            }
+            DataManager.instance.SceneBackgroundChanged();
         }
+        #endregion
 
-        private void renderEnableCheckBox_CheckedChanged(object sender, EventArgs e)
+        #region "Entity EventHandlers"
+        private void entityComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int indexScene = GameEngineEditor.instance.sceneComboBox.SelectedIndex;
-            int indexEntity = GameEngineEditor.instance.entityComboBox.SelectedIndex;
-
-            if (indexScene >= 0 && indexEntity >= 0)
-            {
-                if (renderEnableCheckBox.Checked == true)
-                {
-                    DataManager.instance._scenes[indexScene].GetEntities()[indexEntity].AddComponent(new RenderComponent());
-                }
-                else
-                {
-                    DataManager.instance._scenes[indexScene].GetEntities()[indexEntity].RemoveComponentOfType(typeof(RenderComponent));
-                }
-            }
-            else
-            {
-                DataManager.instance.ClearComponentPanel();
-            }
+            DataManager.instance.EntitySelectedChanged();
         }
 
-        private void boxColliderEnableCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void entityAddBtn_Click(object sender, EventArgs e)
         {
-            int indexScene = GameEngineEditor.instance.sceneComboBox.SelectedIndex;
-            int indexEntity = GameEngineEditor.instance.entityComboBox.SelectedIndex;
-
-            if (indexScene >= 0 && indexEntity >= 0)
-            {
-                if (boxColliderEnableCheckBox.Checked == true)
-                {
-                    DataManager.instance._scenes[indexScene].GetEntities()[indexEntity].AddComponent(new BoxCollisionComponent());
-                }
-                else
-                {
-                    DataManager.instance._scenes[indexScene].GetEntities()[indexEntity].RemoveComponentOfType(typeof(BoxCollisionComponent));
-                }
-            }
-            else
-            {
-                DataManager.instance.ClearComponentPanel();
-            }
+            DataManager.instance.AddEntityClicked();
         }
 
-        private void inputEnableCheckBock_CheckedChanged(object sender, EventArgs e)
+        private void entityRemoveBtn_Click(object sender, EventArgs e)
         {
-            int indexScene = GameEngineEditor.instance.sceneComboBox.SelectedIndex;
-            int indexEntity = GameEngineEditor.instance.entityComboBox.SelectedIndex;
-
-            if (indexScene >= 0 && indexEntity >= 0)
-            {
-                if (inputEnableCheckBox.Checked == true)
-                {
-                    DataManager.instance._scenes[indexScene].GetEntities()[indexEntity].AddComponent(new InputComponent());
-                }
-                else
-                {
-                    DataManager.instance._scenes[indexScene].GetEntities()[indexEntity].RemoveComponentOfType(typeof(InputComponent));
-                }
-            }
-            else
-            {
-                DataManager.instance.ClearComponentPanel();
-            }
+            DataManager.instance.RemoveEntityClicked();
         }
 
-        private void velocityEnableCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void entityNameTextBox_TextChanged(object sender, EventArgs e)
         {
-            int indexScene = GameEngineEditor.instance.sceneComboBox.SelectedIndex;
-            int indexEntity = GameEngineEditor.instance.entityComboBox.SelectedIndex;
-
-            if (indexScene >= 0 && indexEntity >= 0)
-            {
-                if (velocityEnableCheckBox.Checked == true)
-                {
-                    DataManager.instance._scenes[indexScene].GetEntities()[indexEntity].AddComponent(new VelocityComponent());
-                }
-                else
-                {
-                    DataManager.instance._scenes[indexScene].GetEntities()[indexEntity].RemoveComponentOfType(typeof(VelocityComponent));
-                }
-            }
-            else
-            {
-                DataManager.instance.ClearComponentPanel();
-            }
+            DataManager.instance.EntityNameChanged();           
         }
+        #endregion
 
-        private void positionEnableCheckBox_CheckedChanged(object sender, EventArgs e)
+        #region "Components EventHandlers"
+        private void componentComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int indexScene = GameEngineEditor.instance.sceneComboBox.SelectedIndex;
-            int indexEntity = GameEngineEditor.instance.entityComboBox.SelectedIndex;
-
-            if (indexScene >= 0 && indexEntity >= 0)
-            {
-                if (positionEnableCheckBox.Checked == true)
-                {
-                    DataManager.instance._scenes[indexScene].GetEntities()[indexEntity].AddComponent(new PositionComponent());
-                }
-                else
-                {
-                    DataManager.instance._scenes[indexScene].GetEntities()[indexEntity].RemoveComponentOfType(typeof(PositionComponent));
-                }
-            }else
-            {
-                DataManager.instance.ClearComponentPanel();
-            }
+            DataManager.instance.ComponentSelectedChanged();
         }
 
-        private void physicsMasseTextBox_TextChanged(object sender, EventArgs e)
-        {
-            int indexScene = GameEngineEditor.instance.sceneComboBox.SelectedIndex;
-            int indexEntity = GameEngineEditor.instance.entityComboBox.SelectedIndex;
-
-            if (indexScene >= 0 && indexEntity >= 0)
+            #region "INPUT component EventHandlers"
+            private void inputEnableCheckBock_CheckedChanged(object sender, EventArgs e)
             {
-                ((PhysicsComponent)(DataManager.instance._scenes[indexScene].GetEntities()[indexEntity].GetComponentOfType(typeof(PhysicsComponent)))).masse = Int32.Parse(physicsMasseTextBox.Text);
+                DataManager.instance.InputEnableChanged();
             }
-        }
+            private void inputTweakerTextBox_TextChanged(object sender, EventArgs e)
+            {
+                DataManager.instance.InputTweakerChanged();
+            }
+            #endregion
+
+            #region "PHYSICS component EventHandlers"
+            private void physicsEnableCheckBox_CheckedChanged(object sender, EventArgs e)
+            {
+                DataManager.instance.PhysicsEnableChanged();           
+            }
+            private void physicsMasseTextBox_TextChanged(object sender, EventArgs e)
+            {
+                DataManager.instance.MasseChanged();           
+            }
+            private void physicsGravityCheckBox_CheckedChanged(object sender, EventArgs e)
+            {
+                DataManager.instance.UseGravityChanged();
+            }
+
+            private void physicsAirFrictionCheckBox_CheckedChanged(object sender, EventArgs e)
+            {
+                DataManager.instance.UseAirFrictionChanged();
+            }
+
+            private void physicsAirTweakerTextBox_TextChanged(object sender, EventArgs e)
+            {
+                DataManager.instance.AirTweakerChanged();
+            }
+            #endregion
+
+            #region "BOX COLLISION component EventHandlers"
+            private void boxColliderEnableCheckBox_CheckedChanged(object sender, EventArgs e)
+            {
+                DataManager.instance.BoxCollisionEnableChanged();
+            }
+            private void boxColliderSizeXTextBox_TextChanged(object sender, EventArgs e)
+            {
+                DataManager.instance.BoxCollisionSizeXChanged();
+            }
+
+            private void boxColliderSizeYTextBox_TextChanged(object sender, EventArgs e)
+            {
+                DataManager.instance.BoxCollisionSizeYChanged();
+            }
+            #endregion
+
+            #region "POSITION component EventHandlers"
+            private void positionEnableCheckBox_CheckedChanged(object sender, EventArgs e)
+            {
+                DataManager.instance.PositionEnableChanged();
+            }
+            private void positionXTextBox_TextChanged(object sender, EventArgs e)
+            {
+                DataManager.instance.PositionXChanged();
+            }
+
+            private void positionYTextBox_TextChanged(object sender, EventArgs e)
+            {
+                DataManager.instance.PositionYChanged();
+            }
+
+            private void positionAngularTextBox_TextChanged(object sender, EventArgs e)
+            {
+                DataManager.instance.OrientationChanged();
+            }
+            #endregion
+
+            #region "VELOCITY component EventHandlers"
+            private void velocityEnableCheckBox_CheckedChanged(object sender, EventArgs e)
+            {
+                DataManager.instance.VelocityEnableChanged();
+            }
+            private void velocityMaxTextBox_TextChanged(object sender, EventArgs e)
+            {
+                DataManager.instance.MaxVelocityChanged();
+            }
+            #endregion
+
+            #region "RENDER component EventHandlers"
+            private void renderEnableCheckBox_CheckedChanged(object sender, EventArgs e)
+            {
+                DataManager.instance.RenderEnableChanged();
+            }
+            private void renderImageTextBox_TextChanged(object sender, EventArgs e)
+            {
+                DataManager.instance.ImageChanged();
+            }
+
+            private void renderSizeXTextBox_TextChanged(object sender, EventArgs e)
+            {
+                DataManager.instance.ImageSizeXChanged();
+            }
+
+            private void renderSizeYTextBox_TextChanged(object sender, EventArgs e)
+            {
+                DataManager.instance.ImageSizeYChanged();
+            }
+
+
+
+
+        #endregion
+
+        #endregion       
     }
 }

@@ -28,6 +28,42 @@ namespace GameEngineEditor
             InitializeComponent();           
         }
 
+        public void UpdateViewport()
+        {
+            // Clear viewport
+            viewportPanel.Controls.Clear();
+
+            string path = Environment.CurrentDirectory + "\\img\\";
+            int indexScene = sceneComboBox.SelectedIndex;
+
+            foreach(Entity entity in DataManager.instance._scenes[indexScene].GetEntities())
+            {
+                RenderComponent renderComponent = (RenderComponent)entity.GetComponentOfType(typeof(RenderComponent));
+                PositionComponent positionComponent = (PositionComponent)entity.GetComponentOfType(typeof(PositionComponent));
+                if (renderComponent.componentEnable && positionComponent.componentEnable)
+                {
+                    try
+                    {
+                        Panel currentEntity = new Panel();
+                        currentEntity.BackgroundImage = Image.FromFile(path + renderComponent.image);
+                        currentEntity.BackgroundImageLayout = ImageLayout.Stretch;
+                        currentEntity.Size = new Size((int)renderComponent.size.X, (int)renderComponent.size.Y);
+                        currentEntity.MaximumSize = currentEntity.Size;
+                        currentEntity.Location = new Point((int)positionComponent.position.X, (int)positionComponent.position.Y) ;
+                        currentEntity.BackColor = Color.Transparent;
+                        
+
+                        viewportPanel.Controls.Add(currentEntity);
+                        viewportPanel.Show();
+                    }
+                    catch
+                    {
+                       
+                    }
+                }
+            }
+        }
+
         #region "Import/Export EventHandlers"
         private void importBtn_Click(object sender, EventArgs e)
         {
@@ -99,6 +135,7 @@ namespace GameEngineEditor
         private void sceneComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             DataManager.instance.SceneSelectedChanged();
+            UpdateViewport();
         }
 
         private void sceneAddBtn_Click(object sender, EventArgs e)
@@ -206,15 +243,18 @@ namespace GameEngineEditor
             private void positionEnableCheckBox_CheckedChanged(object sender, EventArgs e)
             {
                 DataManager.instance.PositionEnableChanged();
+                UpdateViewport();
             }
             private void positionXTextBox_TextChanged(object sender, EventArgs e)
             {
                 DataManager.instance.PositionXChanged();
+                UpdateViewport();
             }
 
             private void positionYTextBox_TextChanged(object sender, EventArgs e)
             {
                 DataManager.instance.PositionYChanged();
+                UpdateViewport();
             }
 
             private void positionAngularTextBox_TextChanged(object sender, EventArgs e)
@@ -238,20 +278,24 @@ namespace GameEngineEditor
             private void renderEnableCheckBox_CheckedChanged(object sender, EventArgs e)
             {
                 DataManager.instance.RenderEnableChanged();
+                UpdateViewport();
             }
             private void renderImageTextBox_TextChanged(object sender, EventArgs e)
             {
                 DataManager.instance.ImageChanged();
+                UpdateViewport();
             }
 
             private void renderSizeXTextBox_TextChanged(object sender, EventArgs e)
             {
                 DataManager.instance.ImageSizeXChanged();
+                UpdateViewport();
             }
 
             private void renderSizeYTextBox_TextChanged(object sender, EventArgs e)
             {
                 DataManager.instance.ImageSizeYChanged();
+                UpdateViewport();
             }
 
 

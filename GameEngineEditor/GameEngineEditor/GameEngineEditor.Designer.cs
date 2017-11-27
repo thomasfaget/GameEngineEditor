@@ -94,7 +94,7 @@
             this.velocityMaxTextBox = new System.Windows.Forms.TextBox();
             this.velocityEnableCheckBox = new System.Windows.Forms.CheckBox();
             this.velocityMaxLabel = new System.Windows.Forms.Label();
-            this.gamePanel = new System.Windows.Forms.Panel();
+            this.viewportPanel = new System.Windows.Forms.Panel();
             this.filePanel = new System.Windows.Forms.Panel();
             this.exportBtn = new System.Windows.Forms.Button();
             this.importBtn = new System.Windows.Forms.Button();
@@ -845,13 +845,13 @@
             this.velocityMaxLabel.TabIndex = 13;
             this.velocityMaxLabel.Text = "Max velocity";
             // 
-            // gamePanel
+            // viewportPanel
             // 
-            this.gamePanel.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.gamePanel.Location = new System.Drawing.Point(5, 130);
-            this.gamePanel.Name = "gamePanel";
-            this.gamePanel.Size = new System.Drawing.Size(1280, 720);
-            this.gamePanel.TabIndex = 2;
+            this.viewportPanel.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.viewportPanel.Location = new System.Drawing.Point(5, 130);
+            this.viewportPanel.Name = "viewportPanel";
+            this.viewportPanel.Size = new System.Drawing.Size(1280, 720);
+            this.viewportPanel.TabIndex = 2;
             // 
             // filePanel
             // 
@@ -896,7 +896,7 @@
             this.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.ClientSize = new System.Drawing.Size(1582, 855);
             this.Controls.Add(this.filePanel);
-            this.Controls.Add(this.gamePanel);
+            this.Controls.Add(this.viewportPanel);
             this.Controls.Add(this.editorPanel);
             this.Name = "GameEngineEditor";
             this.Text = "Form1";
@@ -927,7 +927,7 @@
 
         #endregion
         public System.Windows.Forms.Panel editorPanel;
-        public System.Windows.Forms.Panel gamePanel;
+        public System.Windows.Forms.Panel viewportPanel;
         public System.Windows.Forms.Panel filePanel;
         public System.Windows.Forms.Button exportBtn;
         public System.Windows.Forms.Button importBtn;

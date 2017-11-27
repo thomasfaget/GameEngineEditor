@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace GameEngineEditor
 {
@@ -141,8 +142,8 @@ namespace GameEngineEditor
                         GameEngineEditor.instance.boxColliderCompPanel.Visible = true;                        
                         BoxCollisionComponent boxCollisionComponent = (BoxCollisionComponent)(_scenes[indexScene].GetEntities()[indexEntity].GetComponentOfType(typeof(BoxCollisionComponent)));
                         GameEngineEditor.instance.boxColliderEnableCheckBox.Checked = boxCollisionComponent.componentEnable;
-                        GameEngineEditor.instance.renderSizeXTextBox.Text = boxCollisionComponent.size.X.ToString();
-                        GameEngineEditor.instance.renderSizeYTextBox.Text = boxCollisionComponent.size.Y.ToString();
+                        GameEngineEditor.instance.boxColliderSizeXTextBox.Text = boxCollisionComponent.size.X.ToString();
+                        GameEngineEditor.instance.boxColliderSizeYTextBox.Text = boxCollisionComponent.size.Y.ToString();
                         break;
                     case ("Position"):
                         GameEngineEditor.instance.positionCompPanel.Visible = true;
@@ -290,6 +291,19 @@ namespace GameEngineEditor
             // UPDATE DATA
             if (indexScene >= 0)
                 _scenes[indexScene].SetBackgroundImage(GameEngineEditor.instance.backgroundImgTextBox.Text);
+
+            // UPDATE VIEWPORT
+            try
+            {
+                string path = Environment.CurrentDirectory + "\\img\\";
+                GameEngineEditor.instance.viewportPanel.BackgroundImage = Bitmap.FromFile(path + GameEngineEditor.instance.backgroundImgTextBox.Text);
+                GameEngineEditor.instance.viewportPanel.Show();
+                GameEngineEditor.instance.backgroundImgTextBox.BackColor = Color.White;
+            }
+            catch
+            {
+                GameEngineEditor.instance.backgroundImgTextBox.BackColor = Color.Red;
+            }
         }
 
         public void EntitySelectedChanged()

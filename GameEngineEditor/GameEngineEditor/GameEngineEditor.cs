@@ -195,11 +195,11 @@ namespace GameEngineEditor
             #region "INPUT component EventHandlers"
             private void inputEnableCheckBock_CheckedChanged(object sender, EventArgs e)
             {
-                DataManager.instance.InputEnableChanged();
+               // DataManager.instance.InputEnableChanged();
             }
             private void inputTweakerTextBox_TextChanged(object sender, EventArgs e)
             {
-                DataManager.instance.InputTweakerChanged();
+               // DataManager.instance.InputTweakerChanged();
             }
             #endregion
 
@@ -242,10 +242,15 @@ namespace GameEngineEditor
             {
                 DataManager.instance.BoxCollisionSizeYChanged();
             }
+
+            private void isTriggerCheckBox_CheckedChanged(object sender, EventArgs e)
+            {
+            DataManager.instance.BoxCollisionIsTriggerChanged();
+        }
             #endregion
 
-            #region "POSITION component EventHandlers"
-            private void positionEnableCheckBox_CheckedChanged(object sender, EventArgs e)
+        #region "POSITION component EventHandlers"
+        private void positionEnableCheckBox_CheckedChanged(object sender, EventArgs e)
             {
                 DataManager.instance.PositionEnableChanged();
                 UpdateViewport();
@@ -304,7 +309,7 @@ namespace GameEngineEditor
             }
         #endregion
 
-        #region "SCRIPT component EventHandlers"
+            #region "SCRIPT component EventHandlers"
         private void scriptEnableCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             DataManager.instance.ScriptEnableChanged();
@@ -320,10 +325,5 @@ namespace GameEngineEditor
         #endregion
 
         #endregion
-
-        private void scriptBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

@@ -37,12 +37,19 @@
             this.editorBackground = new System.Windows.Forms.Panel();
             this.editorTablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.componentPanel = new System.Windows.Forms.Panel();
+            this.componentPanelTitle = new System.Windows.Forms.Label();
+            this.componentComboBox = new System.Windows.Forms.ComboBox();
+            this.boxColliderCompPanel = new System.Windows.Forms.Panel();
+            this.isTriggerCheckBox = new System.Windows.Forms.CheckBox();
+            this.boxColliderSizeYTextBox = new System.Windows.Forms.TextBox();
+            this.boxColliderSizeYLabel = new System.Windows.Forms.Label();
+            this.boxColliderSizeXTextBox = new System.Windows.Forms.TextBox();
+            this.boxColliderEnableCheckBox = new System.Windows.Forms.CheckBox();
+            this.boxColliderSizeXLabel = new System.Windows.Forms.Label();
             this.scriptCompPanel = new System.Windows.Forms.Panel();
             this.scriptNameTextBox = new System.Windows.Forms.TextBox();
             this.scriptEnableCheckBox = new System.Windows.Forms.CheckBox();
             this.scriptLabel = new System.Windows.Forms.Label();
-            this.componentPanelTitle = new System.Windows.Forms.Label();
-            this.componentComboBox = new System.Windows.Forms.ComboBox();
             this.positionCompPanel = new System.Windows.Forms.Panel();
             this.positionAngularTextBox = new System.Windows.Forms.TextBox();
             this.positionAngularLabel = new System.Windows.Forms.Label();
@@ -67,16 +74,6 @@
             this.renderImageTextBox = new System.Windows.Forms.TextBox();
             this.renderEnableCheckBox = new System.Windows.Forms.CheckBox();
             this.renderImageLabel = new System.Windows.Forms.Label();
-            this.boxColliderCompPanel = new System.Windows.Forms.Panel();
-            this.boxColliderSizeYTextBox = new System.Windows.Forms.TextBox();
-            this.boxColliderSizeYLabel = new System.Windows.Forms.Label();
-            this.boxColliderSizeXTextBox = new System.Windows.Forms.TextBox();
-            this.boxColliderEnableCheckBox = new System.Windows.Forms.CheckBox();
-            this.boxColliderSizeXLabel = new System.Windows.Forms.Label();
-            this.inputCompPanel = new System.Windows.Forms.Panel();
-            this.inputTweakerTextBox = new System.Windows.Forms.TextBox();
-            this.inputEnableCheckBox = new System.Windows.Forms.CheckBox();
-            this.inputTweakerLabel = new System.Windows.Forms.Label();
             this.velocityCompPanel = new System.Windows.Forms.Panel();
             this.velocityMaxTextBox = new System.Windows.Forms.TextBox();
             this.velocityEnableCheckBox = new System.Windows.Forms.CheckBox();
@@ -113,12 +110,11 @@
             this.editorBackground.SuspendLayout();
             this.editorTablePanel.SuspendLayout();
             this.componentPanel.SuspendLayout();
+            this.boxColliderCompPanel.SuspendLayout();
             this.scriptCompPanel.SuspendLayout();
             this.positionCompPanel.SuspendLayout();
             this.physicsCompPanel.SuspendLayout();
             this.renderCompPanel.SuspendLayout();
-            this.boxColliderCompPanel.SuspendLayout();
-            this.inputCompPanel.SuspendLayout();
             this.velocityCompPanel.SuspendLayout();
             this.entityPanel.SuspendLayout();
             this.scenePanel.SuspendLayout();
@@ -218,14 +214,13 @@
             // componentPanel
             // 
             this.componentPanel.BackColor = System.Drawing.Color.Transparent;
-            this.componentPanel.Controls.Add(this.scriptCompPanel);
             this.componentPanel.Controls.Add(this.componentPanelTitle);
             this.componentPanel.Controls.Add(this.componentComboBox);
+            this.componentPanel.Controls.Add(this.boxColliderCompPanel);
+            this.componentPanel.Controls.Add(this.scriptCompPanel);
             this.componentPanel.Controls.Add(this.positionCompPanel);
             this.componentPanel.Controls.Add(this.physicsCompPanel);
             this.componentPanel.Controls.Add(this.renderCompPanel);
-            this.componentPanel.Controls.Add(this.boxColliderCompPanel);
-            this.componentPanel.Controls.Add(this.inputCompPanel);
             this.componentPanel.Controls.Add(this.velocityCompPanel);
             this.componentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.componentPanel.ForeColor = System.Drawing.Color.White;
@@ -234,6 +229,112 @@
             this.componentPanel.Name = "componentPanel";
             this.componentPanel.Size = new System.Drawing.Size(309, 338);
             this.componentPanel.TabIndex = 6;
+            // 
+            // componentPanelTitle
+            // 
+            this.componentPanelTitle.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.componentPanelTitle.BackColor = System.Drawing.Color.DimGray;
+            this.componentPanelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.componentPanelTitle.Location = new System.Drawing.Point(0, 0);
+            this.componentPanelTitle.Margin = new System.Windows.Forms.Padding(0);
+            this.componentPanelTitle.Name = "componentPanelTitle";
+            this.componentPanelTitle.Size = new System.Drawing.Size(309, 41);
+            this.componentPanelTitle.TabIndex = 0;
+            this.componentPanelTitle.Text = "COMPONENT";
+            this.componentPanelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // componentComboBox
+            // 
+            this.componentComboBox.FormattingEnabled = true;
+            this.componentComboBox.Items.AddRange(new object[] {
+            "Physics",
+            "BoxCollision",
+            "Position",
+            "Velocity",
+            "Render",
+            "Script"});
+            this.componentComboBox.Location = new System.Drawing.Point(10, 50);
+            this.componentComboBox.Name = "componentComboBox";
+            this.componentComboBox.Size = new System.Drawing.Size(272, 24);
+            this.componentComboBox.TabIndex = 0;
+            this.componentComboBox.SelectedIndexChanged += new System.EventHandler(this.componentComboBox_SelectedIndexChanged);
+            // 
+            // boxColliderCompPanel
+            // 
+            this.boxColliderCompPanel.Controls.Add(this.isTriggerCheckBox);
+            this.boxColliderCompPanel.Controls.Add(this.boxColliderSizeYTextBox);
+            this.boxColliderCompPanel.Controls.Add(this.boxColliderSizeYLabel);
+            this.boxColliderCompPanel.Controls.Add(this.boxColliderSizeXTextBox);
+            this.boxColliderCompPanel.Controls.Add(this.boxColliderEnableCheckBox);
+            this.boxColliderCompPanel.Controls.Add(this.boxColliderSizeXLabel);
+            this.boxColliderCompPanel.Location = new System.Drawing.Point(0, 80);
+            this.boxColliderCompPanel.Name = "boxColliderCompPanel";
+            this.boxColliderCompPanel.Size = new System.Drawing.Size(285, 352);
+            this.boxColliderCompPanel.TabIndex = 19;
+            // 
+            // isTriggerCheckBox
+            // 
+            this.isTriggerCheckBox.AutoSize = true;
+            this.isTriggerCheckBox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.isTriggerCheckBox.ForeColor = System.Drawing.Color.Black;
+            this.isTriggerCheckBox.Location = new System.Drawing.Point(17, 105);
+            this.isTriggerCheckBox.Name = "isTriggerCheckBox";
+            this.isTriggerCheckBox.Size = new System.Drawing.Size(82, 22);
+            this.isTriggerCheckBox.TabIndex = 17;
+            this.isTriggerCheckBox.Text = "IsTrigger";
+            this.isTriggerCheckBox.UseVisualStyleBackColor = true;
+            this.isTriggerCheckBox.CheckedChanged += new System.EventHandler(this.isTriggerCheckBox_CheckedChanged);
+            // 
+            // boxColliderSizeYTextBox
+            // 
+            this.boxColliderSizeYTextBox.Location = new System.Drawing.Point(155, 75);
+            this.boxColliderSizeYTextBox.Name = "boxColliderSizeYTextBox";
+            this.boxColliderSizeYTextBox.Size = new System.Drawing.Size(100, 22);
+            this.boxColliderSizeYTextBox.TabIndex = 16;
+            this.boxColliderSizeYTextBox.TextChanged += new System.EventHandler(this.boxColliderSizeYTextBox_TextChanged);
+            // 
+            // boxColliderSizeYLabel
+            // 
+            this.boxColliderSizeYLabel.AutoSize = true;
+            this.boxColliderSizeYLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.boxColliderSizeYLabel.ForeColor = System.Drawing.Color.Black;
+            this.boxColliderSizeYLabel.Location = new System.Drawing.Point(14, 77);
+            this.boxColliderSizeYLabel.Name = "boxColliderSizeYLabel";
+            this.boxColliderSizeYLabel.Size = new System.Drawing.Size(43, 18);
+            this.boxColliderSizeYLabel.TabIndex = 15;
+            this.boxColliderSizeYLabel.Text = "Size Y";
+            // 
+            // boxColliderSizeXTextBox
+            // 
+            this.boxColliderSizeXTextBox.Location = new System.Drawing.Point(154, 47);
+            this.boxColliderSizeXTextBox.Name = "boxColliderSizeXTextBox";
+            this.boxColliderSizeXTextBox.Size = new System.Drawing.Size(100, 22);
+            this.boxColliderSizeXTextBox.TabIndex = 14;
+            this.boxColliderSizeXTextBox.TextChanged += new System.EventHandler(this.boxColliderSizeXTextBox_TextChanged);
+            // 
+            // boxColliderEnableCheckBox
+            // 
+            this.boxColliderEnableCheckBox.AutoSize = true;
+            this.boxColliderEnableCheckBox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.boxColliderEnableCheckBox.ForeColor = System.Drawing.Color.Black;
+            this.boxColliderEnableCheckBox.Location = new System.Drawing.Point(16, 12);
+            this.boxColliderEnableCheckBox.Name = "boxColliderEnableCheckBox";
+            this.boxColliderEnableCheckBox.Size = new System.Drawing.Size(172, 22);
+            this.boxColliderEnableCheckBox.TabIndex = 14;
+            this.boxColliderEnableCheckBox.Text = "Enable this component";
+            this.boxColliderEnableCheckBox.UseVisualStyleBackColor = true;
+            this.boxColliderEnableCheckBox.CheckedChanged += new System.EventHandler(this.boxColliderEnableCheckBox_CheckedChanged);
+            // 
+            // boxColliderSizeXLabel
+            // 
+            this.boxColliderSizeXLabel.AutoSize = true;
+            this.boxColliderSizeXLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.boxColliderSizeXLabel.ForeColor = System.Drawing.Color.Black;
+            this.boxColliderSizeXLabel.Location = new System.Drawing.Point(13, 49);
+            this.boxColliderSizeXLabel.Name = "boxColliderSizeXLabel";
+            this.boxColliderSizeXLabel.Size = new System.Drawing.Size(44, 18);
+            this.boxColliderSizeXLabel.TabIndex = 13;
+            this.boxColliderSizeXLabel.Text = "Size X";
             // 
             // scriptCompPanel
             // 
@@ -277,36 +378,6 @@
             this.scriptLabel.Size = new System.Drawing.Size(81, 18);
             this.scriptLabel.TabIndex = 13;
             this.scriptLabel.Text = "Script name";
-            // 
-            // componentPanelTitle
-            // 
-            this.componentPanelTitle.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.componentPanelTitle.BackColor = System.Drawing.Color.DimGray;
-            this.componentPanelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.componentPanelTitle.Location = new System.Drawing.Point(0, 0);
-            this.componentPanelTitle.Margin = new System.Windows.Forms.Padding(0);
-            this.componentPanelTitle.Name = "componentPanelTitle";
-            this.componentPanelTitle.Size = new System.Drawing.Size(309, 41);
-            this.componentPanelTitle.TabIndex = 0;
-            this.componentPanelTitle.Text = "COMPONENT";
-            this.componentPanelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // componentComboBox
-            // 
-            this.componentComboBox.FormattingEnabled = true;
-            this.componentComboBox.Items.AddRange(new object[] {
-            "Input",
-            "Physics",
-            "BoxCollision",
-            "Position",
-            "Velocity",
-            "Render",
-            "Script"});
-            this.componentComboBox.Location = new System.Drawing.Point(5, 53);
-            this.componentComboBox.Name = "componentComboBox";
-            this.componentComboBox.Size = new System.Drawing.Size(272, 24);
-            this.componentComboBox.TabIndex = 0;
-            this.componentComboBox.SelectedIndexChanged += new System.EventHandler(this.componentComboBox_SelectedIndexChanged);
             // 
             // positionCompPanel
             // 
@@ -566,112 +637,6 @@
             this.renderImageLabel.Size = new System.Drawing.Size(46, 18);
             this.renderImageLabel.TabIndex = 13;
             this.renderImageLabel.Text = "Image";
-            // 
-            // boxColliderCompPanel
-            // 
-            this.boxColliderCompPanel.Controls.Add(this.boxColliderSizeYTextBox);
-            this.boxColliderCompPanel.Controls.Add(this.boxColliderSizeYLabel);
-            this.boxColliderCompPanel.Controls.Add(this.boxColliderSizeXTextBox);
-            this.boxColliderCompPanel.Controls.Add(this.boxColliderEnableCheckBox);
-            this.boxColliderCompPanel.Controls.Add(this.boxColliderSizeXLabel);
-            this.boxColliderCompPanel.Location = new System.Drawing.Point(0, 80);
-            this.boxColliderCompPanel.Name = "boxColliderCompPanel";
-            this.boxColliderCompPanel.Size = new System.Drawing.Size(285, 352);
-            this.boxColliderCompPanel.TabIndex = 19;
-            // 
-            // boxColliderSizeYTextBox
-            // 
-            this.boxColliderSizeYTextBox.Location = new System.Drawing.Point(155, 75);
-            this.boxColliderSizeYTextBox.Name = "boxColliderSizeYTextBox";
-            this.boxColliderSizeYTextBox.Size = new System.Drawing.Size(100, 22);
-            this.boxColliderSizeYTextBox.TabIndex = 16;
-            this.boxColliderSizeYTextBox.TextChanged += new System.EventHandler(this.boxColliderSizeYTextBox_TextChanged);
-            // 
-            // boxColliderSizeYLabel
-            // 
-            this.boxColliderSizeYLabel.AutoSize = true;
-            this.boxColliderSizeYLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.boxColliderSizeYLabel.ForeColor = System.Drawing.Color.Black;
-            this.boxColliderSizeYLabel.Location = new System.Drawing.Point(14, 77);
-            this.boxColliderSizeYLabel.Name = "boxColliderSizeYLabel";
-            this.boxColliderSizeYLabel.Size = new System.Drawing.Size(43, 18);
-            this.boxColliderSizeYLabel.TabIndex = 15;
-            this.boxColliderSizeYLabel.Text = "Size Y";
-            // 
-            // boxColliderSizeXTextBox
-            // 
-            this.boxColliderSizeXTextBox.Location = new System.Drawing.Point(154, 47);
-            this.boxColliderSizeXTextBox.Name = "boxColliderSizeXTextBox";
-            this.boxColliderSizeXTextBox.Size = new System.Drawing.Size(100, 22);
-            this.boxColliderSizeXTextBox.TabIndex = 14;
-            this.boxColliderSizeXTextBox.TextChanged += new System.EventHandler(this.boxColliderSizeXTextBox_TextChanged);
-            // 
-            // boxColliderEnableCheckBox
-            // 
-            this.boxColliderEnableCheckBox.AutoSize = true;
-            this.boxColliderEnableCheckBox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.boxColliderEnableCheckBox.ForeColor = System.Drawing.Color.Black;
-            this.boxColliderEnableCheckBox.Location = new System.Drawing.Point(16, 12);
-            this.boxColliderEnableCheckBox.Name = "boxColliderEnableCheckBox";
-            this.boxColliderEnableCheckBox.Size = new System.Drawing.Size(172, 22);
-            this.boxColliderEnableCheckBox.TabIndex = 14;
-            this.boxColliderEnableCheckBox.Text = "Enable this component";
-            this.boxColliderEnableCheckBox.UseVisualStyleBackColor = true;
-            this.boxColliderEnableCheckBox.CheckedChanged += new System.EventHandler(this.boxColliderEnableCheckBox_CheckedChanged);
-            // 
-            // boxColliderSizeXLabel
-            // 
-            this.boxColliderSizeXLabel.AutoSize = true;
-            this.boxColliderSizeXLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.boxColliderSizeXLabel.ForeColor = System.Drawing.Color.Black;
-            this.boxColliderSizeXLabel.Location = new System.Drawing.Point(13, 49);
-            this.boxColliderSizeXLabel.Name = "boxColliderSizeXLabel";
-            this.boxColliderSizeXLabel.Size = new System.Drawing.Size(44, 18);
-            this.boxColliderSizeXLabel.TabIndex = 13;
-            this.boxColliderSizeXLabel.Text = "Size X";
-            // 
-            // inputCompPanel
-            // 
-            this.inputCompPanel.Controls.Add(this.inputTweakerTextBox);
-            this.inputCompPanel.Controls.Add(this.inputEnableCheckBox);
-            this.inputCompPanel.Controls.Add(this.inputTweakerLabel);
-            this.inputCompPanel.Location = new System.Drawing.Point(0, 80);
-            this.inputCompPanel.Name = "inputCompPanel";
-            this.inputCompPanel.Size = new System.Drawing.Size(285, 352);
-            this.inputCompPanel.TabIndex = 18;
-            this.inputCompPanel.Visible = false;
-            // 
-            // inputTweakerTextBox
-            // 
-            this.inputTweakerTextBox.Location = new System.Drawing.Point(154, 47);
-            this.inputTweakerTextBox.Name = "inputTweakerTextBox";
-            this.inputTweakerTextBox.Size = new System.Drawing.Size(100, 22);
-            this.inputTweakerTextBox.TabIndex = 14;
-            this.inputTweakerTextBox.TextChanged += new System.EventHandler(this.inputTweakerTextBox_TextChanged);
-            // 
-            // inputEnableCheckBox
-            // 
-            this.inputEnableCheckBox.AutoSize = true;
-            this.inputEnableCheckBox.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.inputEnableCheckBox.ForeColor = System.Drawing.Color.Black;
-            this.inputEnableCheckBox.Location = new System.Drawing.Point(16, 12);
-            this.inputEnableCheckBox.Name = "inputEnableCheckBox";
-            this.inputEnableCheckBox.Size = new System.Drawing.Size(172, 22);
-            this.inputEnableCheckBox.TabIndex = 14;
-            this.inputEnableCheckBox.Text = "Enable this component";
-            this.inputEnableCheckBox.UseVisualStyleBackColor = true;
-            this.inputEnableCheckBox.CheckedChanged += new System.EventHandler(this.inputEnableCheckBock_CheckedChanged);
-            // 
-            // inputTweakerLabel
-            // 
-            this.inputTweakerLabel.AutoSize = true;
-            this.inputTweakerLabel.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.inputTweakerLabel.ForeColor = System.Drawing.Color.Black;
-            this.inputTweakerLabel.Location = new System.Drawing.Point(13, 49);
-            this.inputTweakerLabel.Name = "inputTweakerLabel";
-            this.inputTweakerLabel.Size = new System.Drawing.Size(96, 18);
-            this.inputTweakerLabel.TabIndex = 13;
-            this.inputTweakerLabel.Text = "Input Tweaker";
             // 
             // velocityCompPanel
             // 
@@ -1029,6 +994,8 @@
             this.editorBackground.ResumeLayout(false);
             this.editorTablePanel.ResumeLayout(false);
             this.componentPanel.ResumeLayout(false);
+            this.boxColliderCompPanel.ResumeLayout(false);
+            this.boxColliderCompPanel.PerformLayout();
             this.scriptCompPanel.ResumeLayout(false);
             this.scriptCompPanel.PerformLayout();
             this.positionCompPanel.ResumeLayout(false);
@@ -1037,10 +1004,6 @@
             this.physicsCompPanel.PerformLayout();
             this.renderCompPanel.ResumeLayout(false);
             this.renderCompPanel.PerformLayout();
-            this.boxColliderCompPanel.ResumeLayout(false);
-            this.boxColliderCompPanel.PerformLayout();
-            this.inputCompPanel.ResumeLayout(false);
-            this.inputCompPanel.PerformLayout();
             this.velocityCompPanel.ResumeLayout(false);
             this.velocityCompPanel.PerformLayout();
             this.entityPanel.ResumeLayout(false);
@@ -1095,10 +1058,6 @@
         public System.Windows.Forms.TextBox boxColliderSizeXTextBox;
         public System.Windows.Forms.CheckBox boxColliderEnableCheckBox;
         public System.Windows.Forms.Label boxColliderSizeXLabel;
-        public System.Windows.Forms.Panel inputCompPanel;
-        public System.Windows.Forms.TextBox inputTweakerTextBox;
-        public System.Windows.Forms.CheckBox inputEnableCheckBox;
-        public System.Windows.Forms.Label inputTweakerLabel;
         public System.Windows.Forms.Panel velocityCompPanel;
         public System.Windows.Forms.TextBox velocityMaxTextBox;
         public System.Windows.Forms.CheckBox velocityEnableCheckBox;
@@ -1134,6 +1093,7 @@
         public System.Windows.Forms.TextBox scriptNameTextBox;
         public System.Windows.Forms.CheckBox scriptEnableCheckBox;
         public System.Windows.Forms.Label scriptLabel;
+        public System.Windows.Forms.CheckBox isTriggerCheckBox;
     }
 }
 

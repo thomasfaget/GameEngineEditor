@@ -56,6 +56,7 @@ namespace GameEngineEditor
             {
                 GameEngineEditor.instance.sceneNameTextBox.Visible = true;
                 GameEngineEditor.instance.backgroundImgTextBox.Visible = true;
+                GameEngineEditor.instance.backgroundSoundTextBox.Visible = true;
                 GameEngineEditor.instance.entityPanel.Visible = true;
                 GameEngineEditor.instance.sceneNameTextBox.Text = _scenes[indexScene].GetName();
                 GameEngineEditor.instance.backgroundImgTextBox.Text = _scenes[indexScene].GetBackgroundImage();
@@ -65,6 +66,7 @@ namespace GameEngineEditor
             {
                 GameEngineEditor.instance.sceneNameTextBox.Visible = false;
                 GameEngineEditor.instance.backgroundImgTextBox.Visible = false;
+                GameEngineEditor.instance.backgroundSoundTextBox.Visible = false;
                 GameEngineEditor.instance.entityPanel.Visible = false;
                 GameEngineEditor.instance.sceneNameTextBox.Text = "";
                 GameEngineEditor.instance.backgroundImgTextBox.Text = "";
@@ -108,7 +110,7 @@ namespace GameEngineEditor
             }
 
             // Show nothing
-            GameEngineEditor.instance.componentComboBox.SelectedIndex = -1;
+            //GameEngineEditor.instance.componentComboBox.SelectedIndex = -1;
             UpdateComponentProperties();            
         }
         private void UpdateComponentProperties()
@@ -123,13 +125,7 @@ namespace GameEngineEditor
             {
                 string componentPanelComboBoxText = GameEngineEditor.instance.componentComboBox.SelectedItem.ToString();
                 switch (componentPanelComboBoxText)
-                {
-                    case ("Input"):
-                        GameEngineEditor.instance.inputCompPanel.Visible = true;
-                        InputComponent inputComponent = (InputComponent)(_scenes[indexScene].GetEntities()[indexEntity].GetComponentOfType(typeof(InputComponent)));
-                        GameEngineEditor.instance.inputEnableCheckBox.Checked = inputComponent.componentEnable;
-                        GameEngineEditor.instance.inputTweakerTextBox.Text = inputComponent.inputTweaker.ToString();
-                        break;
+                {                  
                     case ("Physics"):
                         GameEngineEditor.instance.physicsCompPanel.Visible = true;
                         PhysicsComponent physicsComponent = (PhysicsComponent)(_scenes[indexScene].GetEntities()[indexEntity].GetComponentOfType(typeof(PhysicsComponent)));
@@ -146,6 +142,7 @@ namespace GameEngineEditor
                         GameEngineEditor.instance.boxColliderEnableCheckBox.Checked = boxCollisionComponent.componentEnable;
                         GameEngineEditor.instance.boxColliderSizeXTextBox.Text = boxCollisionComponent.size.X.ToString();
                         GameEngineEditor.instance.boxColliderSizeYTextBox.Text = boxCollisionComponent.size.Y.ToString();
+                        GameEngineEditor.instance.isTriggerCheckBox.Checked = boxCollisionComponent.isTrigger;
                         break;
                     case ("Position"):
                         GameEngineEditor.instance.positionCompPanel.Visible = true;
@@ -182,14 +179,12 @@ namespace GameEngineEditor
         }
         private void HideComponentPanel()
         {
-            GameEngineEditor.instance.inputCompPanel.Visible = false;
             GameEngineEditor.instance.physicsCompPanel.Visible = false;
             GameEngineEditor.instance.boxColliderCompPanel.Visible = false;
             GameEngineEditor.instance.positionCompPanel.Visible = false;
             GameEngineEditor.instance.velocityCompPanel.Visible = false;
             GameEngineEditor.instance.renderCompPanel.Visible = false;
             GameEngineEditor.instance.scriptCompPanel.Visible = false;
-
         }
         private void UpdateComponentsValues()
         {
@@ -200,12 +195,7 @@ namespace GameEngineEditor
             {
                 foreach (IComponent component in _scenes[indexScene].GetEntities()[indexEntity].GetComponents())
                 {
-                    if (component.GetType() == typeof(InputComponent))
-                    {
-                        GameEngineEditor.instance.inputEnableCheckBox.Checked = component.GetEnable();
-                        GameEngineEditor.instance.inputTweakerTextBox.Text = (((InputComponent)component).inputTweaker).ToString();
-                    }
-                    else if (component.GetType() == typeof(PhysicsComponent))
+                    if (component.GetType() == typeof(PhysicsComponent))
                     {
                         GameEngineEditor.instance.physicsEnableCheckBox.Checked = component.GetEnable();
                         GameEngineEditor.instance.physicsMasseTextBox.Text = (((PhysicsComponent)component).masse).ToString();
@@ -341,7 +331,6 @@ namespace GameEngineEditor
             Entity newEntity = new Entity();
             newEntity.SetName("Entity" + _scenes[indexScene].GetEntities().Count);
 
-            newEntity.AddComponent(new InputComponent());
             newEntity.AddComponent(new PhysicsComponent());
             newEntity.AddComponent(new BoxCollisionComponent());
             newEntity.AddComponent(new PositionComponent());
@@ -375,31 +364,6 @@ namespace GameEngineEditor
         {
             UpdateComponentProperties();
         }
-
-        #region "INPUT component callbacks"
-        public void InputEnableChanged() {
-            int indexScene = GameEngineEditor.instance.sceneComboBox.SelectedIndex;
-            int indexEntity = GameEngineEditor.instance.entityComboBox.SelectedIndex;
-
-            if (indexScene >= 0 && indexEntity >= 0)
-            {
-                _scenes[indexScene].GetEntities()[indexEntity].GetComponentOfType(typeof(InputComponent)).SetEnable(GameEngineEditor.instance.inputEnableCheckBox.Checked);
-            }
-            else
-            {
-                HideComponentPanel();
-            }
-        }
-        public void InputTweakerChanged() {
-            int indexScene = GameEngineEditor.instance.sceneComboBox.SelectedIndex;
-            int indexEntity = GameEngineEditor.instance.entityComboBox.SelectedIndex;
-
-            if (indexScene >= 0 && indexEntity >= 0 && float.TryParse(GameEngineEditor.instance.inputTweakerTextBox.Text, out float value))
-            {
-                ((InputComponent)(_scenes[indexScene].GetEntities()[indexEntity].GetComponentOfType(typeof(InputComponent)))).inputTweaker = value;
-            }
-        }
-        #endregion
 
         #region "PHYSICS component callbacks"
         public void PhysicsEnableChanged() {
@@ -486,6 +450,17 @@ namespace GameEngineEditor
                 ((BoxCollisionComponent)(_scenes[indexScene].GetEntities()[indexEntity].GetComponentOfType(typeof(BoxCollisionComponent)))).size.Y = value;
             }
         }
+        public void BoxCollisionIsTriggerChanged()
+        {
+            int indexScene = GameEngineEditor.instance.sceneComboBox.SelectedIndex;
+            int indexEntity = GameEngineEditor.instance.entityComboBox.SelectedIndex;
+
+            if (indexScene >= 0 && indexEntity >= 0)
+            {
+                ((BoxCollisionComponent)(_scenes[indexScene].GetEntities()[indexEntity].GetComponentOfType(typeof(BoxCollisionComponent)))).isTrigger = GameEngineEditor.instance.isTriggerCheckBox.Checked;
+            }
+        }
+        
         #endregion
 
         #region "POSITION component callbacks"
@@ -625,6 +600,7 @@ namespace GameEngineEditor
             }
         }
         #endregion
+
         #endregion
 
         #region "Import Section"
@@ -684,7 +660,6 @@ namespace GameEngineEditor
             currentEntity.SetName(entity.FirstAttribute.Value);
             currentScene.GetEntities().Add(currentEntity);
 
-            currentEntity.AddComponent(new InputComponent());
             currentEntity.AddComponent(new PhysicsComponent());
             currentEntity.AddComponent(new BoxCollisionComponent());
             currentEntity.AddComponent(new PositionComponent());
@@ -704,11 +679,6 @@ namespace GameEngineEditor
             //Component
             switch (component.Attribute("Type").Value)
             {
-                case "Input":
-                    InputComponent inputcomponent = ((InputComponent)currentEntity.GetComponentOfType(typeof(InputComponent)));
-                    inputcomponent.SetEnable(true);
-                    inputcomponent.inputTweaker = float.Parse(component.Element("inputTweaker").Value);
-                    break;
                 case "Physics":
                     PhysicsComponent physicsComponent = ((PhysicsComponent)currentEntity.GetComponentOfType(typeof(PhysicsComponent)));
                     physicsComponent.SetEnable(true);
@@ -722,6 +692,7 @@ namespace GameEngineEditor
                     boxCollisionComponent.SetEnable(true);
                     boxCollisionComponent.size.X = float.Parse(component.Element("sizeX").Value);
                     boxCollisionComponent.size.Y = float.Parse(component.Element("sizeY").Value);
+                    boxCollisionComponent.isTrigger = bool.Parse(component.Element("isTrigger").Value);
                     break;
                 case "Position":
                     PositionComponent positionComponent = ((PositionComponent)currentEntity.GetComponentOfType(typeof(PositionComponent)));
@@ -763,17 +734,7 @@ namespace GameEngineEditor
             gameProperties.screenWidth = Int32.Parse(gamePropertyElement.Element("Width").Value);
             gameProperties.screenHeight = Int32.Parse(gamePropertyElement.Element("Height").Value);
         }
-        /// <summary>
-        /// Load game properties from xml file
-        /// </summary>
-        public void ExportGameProperties(XDocument doc)
-        {
-            doc.Element("Game.xml").Add(new XElement("GameProperties",
-                new XElement("Name", gameProperties.gameName),
-                new XElement("Width", gameProperties.screenWidth),
-                new XElement("Height", gameProperties.screenHeight))
-                );
-        }
+        
         #endregion
 
         #region "Export Section"
@@ -826,12 +787,7 @@ namespace GameEngineEditor
         private void AddComponentToDoc(XElement components, IComponent component)
         {
             XElement currentComponent = new XElement("Component");
-            if (component.GetType() == typeof(InputComponent))
-            {                
-                currentComponent.Add(new XAttribute("Type", "Input"));
-                currentComponent.Add(new XElement("inputTweaker", ((InputComponent)component).inputTweaker));               
-            }
-            else if (component.GetType() == typeof(PhysicsComponent))
+            if (component.GetType() == typeof(PhysicsComponent))
             {                
                 currentComponent.Add(new XAttribute("Type", "Physics"));
                 currentComponent.Add(new XElement("masse", ((PhysicsComponent)component).masse));
@@ -844,6 +800,7 @@ namespace GameEngineEditor
                 currentComponent.Add(new XAttribute("Type", "BoxCollision"));
                 currentComponent.Add(new XElement("sizeX", ((BoxCollisionComponent)component).size.X));
                 currentComponent.Add(new XElement("sizeY", ((BoxCollisionComponent)component).size.Y));
+                currentComponent.Add(new XElement("isTrigger", ((BoxCollisionComponent)component).isTrigger));
             }
             else if (component.GetType() == typeof(PositionComponent))
             {
@@ -874,6 +831,17 @@ namespace GameEngineEditor
                 throw new Exception("Unknow type detected.");
             }
             components.Add(currentComponent);
+        }
+        /// <summary>
+        /// Load game properties from xml file
+        /// </summary>
+        public void ExportGameProperties(XDocument doc)
+        {
+            doc.Element("Game.xml").Add(new XElement("GameProperties",
+                new XElement("Name", gameProperties.gameName),
+                new XElement("Width", gameProperties.screenWidth),
+                new XElement("Height", gameProperties.screenHeight))
+                );
         }
         #endregion
 

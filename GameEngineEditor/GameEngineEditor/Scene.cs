@@ -12,6 +12,7 @@ namespace GameEngineEditor
     {
         private string name = "Unknown";
         private string backgroundImage;
+        private string backgroundSound;
 
         private List<Entity> _entities = new List<Entity>();
 
@@ -41,5 +42,9 @@ namespace GameEngineEditor
 
         public void SetBackgroundImage(string imageName) { backgroundImage = imageName; }
         public string GetBackgroundImage() { return backgroundImage; }
+
+        public void SetBackgroundSound(string soundName) { backgroundSound = soundName; }
+        public string GetBackgroundSound() { return backgroundSound; }
+
     }
 }

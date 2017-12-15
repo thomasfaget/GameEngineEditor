@@ -59,6 +59,7 @@ namespace GameEngineEditor
                 GameEngineEditor.instance.entityPanel.Visible = true;
                 GameEngineEditor.instance.sceneNameTextBox.Text = _scenes[indexScene].GetName();
                 GameEngineEditor.instance.backgroundImgTextBox.Text = _scenes[indexScene].GetBackgroundImage();
+                GameEngineEditor.instance.backgroundSoundTextBox.Text = _scenes[indexScene].GetBackgroundSound();
             }
             else
             {
@@ -66,7 +67,8 @@ namespace GameEngineEditor
                 GameEngineEditor.instance.backgroundImgTextBox.Visible = false;
                 GameEngineEditor.instance.entityPanel.Visible = false;
                 GameEngineEditor.instance.sceneNameTextBox.Text = "";
-                GameEngineEditor.instance.backgroundImgTextBox.Text = "";                
+                GameEngineEditor.instance.backgroundImgTextBox.Text = "";
+                GameEngineEditor.instance.backgroundSoundTextBox.Text = "";
             }
 
             UpdateEntityComboBoxValue();
@@ -166,6 +168,12 @@ namespace GameEngineEditor
                         GameEngineEditor.instance.renderSizeXTextBox.Text = renderComponent.size.X.ToString();
                         GameEngineEditor.instance.renderSizeYTextBox.Text = renderComponent.size.Y.ToString();
                         break;
+                    case ("Script"):
+                        GameEngineEditor.instance.scriptCompPanel.Visible = true;
+                        ScriptComponent scriptComponent = (ScriptComponent)(_scenes[indexScene].GetEntities()[indexEntity].GetComponentOfType(typeof(ScriptComponent)));
+                        GameEngineEditor.instance.scriptEnableCheckBox.Checked = scriptComponent.componentEnable;
+                        GameEngineEditor.instance.scriptNameTextBox.Text = scriptComponent.scriptName?.ToString();
+                        break;
                     default:
                         break;
                 }
@@ -180,6 +188,7 @@ namespace GameEngineEditor
             GameEngineEditor.instance.positionCompPanel.Visible = false;
             GameEngineEditor.instance.velocityCompPanel.Visible = false;
             GameEngineEditor.instance.renderCompPanel.Visible = false;
+            GameEngineEditor.instance.scriptCompPanel.Visible = false;
 
         }
         private void UpdateComponentsValues()
@@ -229,6 +238,11 @@ namespace GameEngineEditor
                         GameEngineEditor.instance.renderSizeXTextBox.Text = (((RenderComponent)component).size.X).ToString();
                         GameEngineEditor.instance.renderSizeYTextBox.Text = (((RenderComponent)component).size.Y).ToString();
                     }
+                    else if (component.GetType() == typeof(ScriptComponent))
+                    {
+                        GameEngineEditor.instance.scriptEnableCheckBox.Checked = component.GetEnable();
+                        GameEngineEditor.instance.scriptNameTextBox.Text = (((ScriptComponent)component).scriptName).ToString();
+                    }
                     else
                     {
                         throw new Exception("Unknow type detected.");
@@ -261,6 +275,7 @@ namespace GameEngineEditor
             Scene newScene = new Scene();
             newScene.SetName("Scene" + _scenes.Count);
             newScene.SetBackgroundImage("background.png");
+            newScene.SetBackgroundSound("sound.wav");
             _scenes.Add(newScene);
 
             UpdateSceneComboBoxValue();
@@ -284,7 +299,7 @@ namespace GameEngineEditor
                 //GameEngineEditor.instance.sceneComboBox.Text = _scenes[indexScene].GetName();
             }
         }
-        public void SceneBackgroundChanged()
+        public void SceneBackgroundImageChanged()
         {
             int indexScene = GameEngineEditor.instance.sceneComboBox.SelectedIndex;
 
@@ -305,6 +320,14 @@ namespace GameEngineEditor
             {
                 GameEngineEditor.instance.backgroundImgTextBox.BackColor = Color.Red;
             }
+        }
+        public void SceneBackgroundSoundChanged()
+        {
+            int indexScene = GameEngineEditor.instance.sceneComboBox.SelectedIndex;
+
+            // UPDATE DATA
+            if (indexScene >= 0)
+                _scenes[indexScene].SetBackgroundSound(GameEngineEditor.instance.backgroundSoundTextBox.Text);
         }
 
         public void EntitySelectedChanged()
@@ -576,6 +599,32 @@ namespace GameEngineEditor
         }
         #endregion
 
+        #region "RENDER component callbacks"
+        public void ScriptEnableChanged()
+        {
+            int indexScene = GameEngineEditor.instance.sceneComboBox.SelectedIndex;
+            int indexEntity = GameEngineEditor.instance.entityComboBox.SelectedIndex;
+
+            if (indexScene >= 0 && indexEntity >= 0)
+            {
+                _scenes[indexScene].GetEntities()[indexEntity].GetComponentOfType(typeof(RenderComponent)).SetEnable(GameEngineEditor.instance.renderEnableCheckBox.Checked);
+            }
+            else
+            {
+                HideComponentPanel();
+            }
+        }
+        public void ScriptNameChanged()
+        {
+            int indexScene = GameEngineEditor.instance.sceneComboBox.SelectedIndex;
+            int indexEntity = GameEngineEditor.instance.entityComboBox.SelectedIndex;
+
+            if (indexScene >= 0 && indexEntity >= 0)
+            {
+                ((ScriptComponent)(_scenes[indexScene].GetEntities()[indexEntity].GetComponentOfType(typeof(ScriptComponent)))).scriptName = GameEngineEditor.instance.scriptNameTextBox.Text;
+            }
+        }
+        #endregion
         #endregion
 
         #region "Import Section"
@@ -618,6 +667,7 @@ namespace GameEngineEditor
             Scene currentScene = new Scene();
             currentScene.SetName(scene.Attribute("Name").Value);
             currentScene.SetBackgroundImage(scene.Element("BackgroundImage").Value);
+            currentScene.SetBackgroundSound(scene.Element("BackgroundSound").Value);
             _scenes.Add(currentScene);
 
             // Elements
@@ -640,6 +690,7 @@ namespace GameEngineEditor
             currentEntity.AddComponent(new PositionComponent());
             currentEntity.AddComponent(new VelocityComponent());
             currentEntity.AddComponent(new RenderComponent());
+            currentEntity.AddComponent(new ScriptComponent());
 
             // Components
             XElement components = entity.Element("Components");
@@ -690,6 +741,11 @@ namespace GameEngineEditor
                     renderComponent.image = component.Element("image").Value;
                     renderComponent.size.X = int.Parse(component.Element("sizeX").Value);
                     renderComponent.size.Y = int.Parse(component.Element("sizeY").Value);
+                    break;
+                case "Script":
+                    ScriptComponent scriptComponent = ((ScriptComponent)currentEntity.GetComponentOfType(typeof(ScriptComponent)));
+                    scriptComponent.SetEnable(true);
+                    scriptComponent.scriptName = component.Element("scriptName").Value;
                     break;
                 default:
                     throw new Exception("Undefined Component");
@@ -746,6 +802,7 @@ namespace GameEngineEditor
         {
             XElement currentScene = new XElement("Scene", new XAttribute("Name", scene.GetName()));
             currentScene.Add(new XElement("BackgroundImage", scene.GetBackgroundImage()));
+            currentScene.Add(new XElement("BackgroundSound", scene.GetBackgroundSound()));
             XElement entities = new XElement("Entities");
             currentScene.Add(entities);
             scenes.Add(currentScene);          
@@ -806,6 +863,11 @@ namespace GameEngineEditor
                 currentComponent.Add(new XElement("image", ((RenderComponent)component).image));
                 currentComponent.Add(new XElement("sizeX", ((RenderComponent)component).size.X));
                 currentComponent.Add(new XElement("sizeY", ((RenderComponent)component).size.Y));
+            }
+            else if (component.GetType() == typeof(ScriptComponent))
+            {
+                currentComponent.Add(new XAttribute("Type", "Script"));
+                currentComponent.Add(new XElement("scriptName", ((ScriptComponent)component).scriptName));
             }
             else
             {

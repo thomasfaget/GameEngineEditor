@@ -155,7 +155,12 @@ namespace GameEngineEditor
 
         private void backgroundImgTextBox_TextChanged(object sender, EventArgs e)
         {
-            DataManager.instance.SceneBackgroundChanged();
+            DataManager.instance.SceneBackgroundImageChanged();
+        }
+
+        private void backgroundSoundTextBox_TextChanged(object sender, EventArgs e)
+        {
+            DataManager.instance.SceneBackgroundSoundChanged();
         }
         #endregion
 
@@ -297,7 +302,18 @@ namespace GameEngineEditor
                 DataManager.instance.ImageSizeYChanged();
                 UpdateViewport();
             }
+        #endregion
 
+        #region "SCRIPT component EventHandlers"
+        private void scriptEnableCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            DataManager.instance.ScriptEnableChanged();
+        }
+
+        private void scriptNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            DataManager.instance.ScriptNameChanged();
+        }
 
 
 
@@ -305,7 +321,7 @@ namespace GameEngineEditor
 
         #endregion
 
-        private void viewportPanel_Paint(object sender, PaintEventArgs e)
+        private void scriptBox_TextChanged(object sender, EventArgs e)
         {
 
         }

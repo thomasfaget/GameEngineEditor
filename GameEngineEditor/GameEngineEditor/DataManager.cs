@@ -299,6 +299,7 @@ namespace GameEngineEditor
                 GameEngineEditor.instance.viewportPanel.BackgroundImage = Bitmap.FromFile(path + GameEngineEditor.instance.backgroundImgTextBox.Text);
                 GameEngineEditor.instance.viewportPanel.Show();
                 GameEngineEditor.instance.backgroundImgTextBox.BackColor = Color.White;
+                GameEngineEditor.instance.viewportPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             }
             catch
             {

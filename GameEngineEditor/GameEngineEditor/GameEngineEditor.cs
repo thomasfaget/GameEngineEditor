@@ -303,6 +303,11 @@ namespace GameEngineEditor
 
         #endregion
 
-        #endregion       
+        #endregion
+
+        private void viewportPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

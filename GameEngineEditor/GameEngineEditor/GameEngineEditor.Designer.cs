@@ -232,8 +232,8 @@
             // 
             // componentPanelTitle
             // 
-            this.componentPanelTitle.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.componentPanelTitle.BackColor = System.Drawing.Color.DimGray;
+            this.componentPanelTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.componentPanelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.componentPanelTitle.Location = new System.Drawing.Point(0, 0);
             this.componentPanelTitle.Margin = new System.Windows.Forms.Padding(0);
@@ -707,8 +707,8 @@
             // 
             // entityPanelLabel
             // 
-            this.entityPanelLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.entityPanelLabel.BackColor = System.Drawing.Color.DimGray;
+            this.entityPanelLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.entityPanelLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.entityPanelLabel.Location = new System.Drawing.Point(0, 0);
             this.entityPanelLabel.Margin = new System.Windows.Forms.Padding(0);
@@ -840,8 +840,8 @@
             // 
             // scenePanelTitle
             // 
-            this.scenePanelTitle.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.scenePanelTitle.BackColor = System.Drawing.Color.DimGray;
+            this.scenePanelTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.scenePanelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.scenePanelTitle.Location = new System.Drawing.Point(0, 0);
             this.scenePanelTitle.Margin = new System.Windows.Forms.Padding(0);
@@ -959,8 +959,8 @@
             // 
             // gamePropTitle
             // 
-            this.gamePropTitle.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.gamePropTitle.BackColor = System.Drawing.Color.DimGray;
+            this.gamePropTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.gamePropTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gamePropTitle.Location = new System.Drawing.Point(0, 0);
             this.gamePropTitle.Margin = new System.Windows.Forms.Padding(0);
@@ -1023,8 +1023,6 @@
         public System.Windows.Forms.SaveFileDialog ExportFileDialogBox;
         public System.Windows.Forms.OpenFileDialog ImportFileDialogBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Panel editorBackground;
-        private System.Windows.Forms.TableLayoutPanel editorTablePanel;
         public System.Windows.Forms.Panel componentPanel;
         public System.Windows.Forms.Label componentPanelTitle;
         public System.Windows.Forms.ComboBox componentComboBox;
@@ -1094,6 +1092,8 @@
         public System.Windows.Forms.CheckBox scriptEnableCheckBox;
         public System.Windows.Forms.Label scriptLabel;
         public System.Windows.Forms.CheckBox isTriggerCheckBox;
+        public System.Windows.Forms.Panel editorBackground;
+        public System.Windows.Forms.TableLayoutPanel editorTablePanel;
     }
 }
 
